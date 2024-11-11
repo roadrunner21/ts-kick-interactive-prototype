@@ -1,4 +1,6 @@
-[
+// src/assets/data/usernames.ts
+
+export const usernamesData = [
   "GamerGuy",
   "ChatMaster",
   "Lurker42",
@@ -9,4 +11,4 @@
   "SaltyDog",
   "MagicMike",
   "EpicGamer"
-]
+];
