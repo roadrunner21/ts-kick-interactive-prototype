@@ -1,7 +1,7 @@
 <!-- Stream.vue -->
 
 <template>
-  <div class="aspect-w-16 aspect-h-9 bg-kick-stream-bg rounded-lg flex items-center justify-center">
+  <div class="aspect-w-16 aspect-h-9 rounded-lg flex items-center justify-center">
     <!-- Use the StreamerSmiley component with a specific emotion -->
     <StreamerSmiley emotion="neutral" />
   </div>
