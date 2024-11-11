@@ -1,5 +1,5 @@
 <template>
-  <div class="streamer-smiley">
+  <div class="flex items-center justify-center">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -84,11 +84,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.streamer-smiley {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
