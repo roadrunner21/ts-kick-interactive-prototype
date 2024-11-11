@@ -1,25 +1,27 @@
+<!-- DonationButtons.vue -->
+
 <template>
   <div class="flex flex-wrap justify-center gap-4">
     <button
-        class="bg-green-500 text-white py-2 px-4 rounded shadow hover:bg-green-600"
+        class="bg-kick-highlight text-kick-bg py-2 px-4 rounded hover:bg-kick-button-hover"
         @click="donate(5)"
     >
       Donate $5
     </button>
     <button
-        class="bg-blue-500 text-white py-2 px-4 rounded shadow hover:bg-blue-600"
+        class="bg-kick-highlight text-kick-bg py-2 px-4 rounded hover:bg-kick-button-hover"
         @click="donate(20)"
     >
       Donate $20
     </button>
     <button
-        class="bg-purple-500 text-white py-2 px-4 rounded shadow hover:bg-purple-600"
+        class="bg-kick-highlight text-kick-bg py-2 px-4 rounded hover:bg-kick-button-hover"
         @click="donate(100)"
     >
       Donate $100
     </button>
     <button
-        class="bg-red-500 text-white py-2 px-4 rounded shadow hover:bg-red-600"
+        class="bg-kick-highlight text-kick-bg py-2 px-4 rounded hover:bg-kick-button-hover"
         @click="donate(500)"
     >
       Donate $500
@@ -46,5 +48,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Component-specific styles (if any) */
+/* No additional styles needed */
 </style>

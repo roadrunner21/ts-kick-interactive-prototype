@@ -1,7 +1,13 @@
+<!-- Chat.vue -->
+
 <template>
-  <div class="bg-gray-200 rounded-lg p-2 h-64 overflow-y-auto">
-    <!-- Placeholder for the chat area -->
-    <p class="text-gray-500 text-center">Chat Placeholder</p>
+  <div class="bg-kick-bg rounded-lg p-2 h-64 overflow-y-auto">
+    <!-- Chat Header -->
+    <div class="border-b border-kick-border pb-2 mb-2">
+      <p class="text-white font-semibold">Chat</p>
+    </div>
+    <!-- Chat Messages Placeholder -->
+    <p class="text-white text-center">Chat</p>
   </div>
 </template>
 

@@ -1,3 +1,5 @@
+<!-- StreamerSmiley.vue -->
+
 <template>
   <div class="flex items-center justify-center">
     <svg
@@ -22,7 +24,7 @@
       </template>
 
       <!-- Mouth -->
-      <!-- Money Eyes (Big Smile) -->
+      <!-- Ecstatic -->
       <path
           v-if="emotion === 'ecstatic'"
           d="M4 12 Q12 24, 20 12"
@@ -84,3 +86,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+/* No additional styles needed */
+</style>
