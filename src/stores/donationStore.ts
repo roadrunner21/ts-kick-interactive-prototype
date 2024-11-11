@@ -1,10 +1,9 @@
-// src/stores/donationStore.ts
-
 import { defineStore } from 'pinia';
 
 export const useDonationStore = defineStore('donation', {
   state: () => ({
     totalDonation: 0,
+    channelPoints: 0,
     hypeTrainActive: false,
     hypeTrainLevel: 0,
     hypeTrainProgress: 0,
@@ -13,7 +12,7 @@ export const useDonationStore = defineStore('donation', {
     hypeTrainIntervalId: null as null | number,
     chatMessages: [] as string[],
     hypeTrainEndedRecently: false,
-    hypeTrainEndTimeoutId: null as null | number
+    hypeTrainEndTimeoutId: null as null | number,
   }),
 
   actions: {
@@ -21,10 +20,21 @@ export const useDonationStore = defineStore('donation', {
       this.totalDonation += amount;
       this.chatMessages.push(`User123 donated $${amount}!`);
 
+      // Add channel points based on donation
+      this.channelPoints += amount; // Example: 1 point per dollar donated
+
       if (!this.hypeTrainActive) {
         this.startHypeTrain();
       }
       this.updateHypeTrainProgress(amount);
+    },
+
+    redeemChannelPoints(points: number): boolean {
+      if (this.channelPoints >= points) {
+        this.channelPoints -= points;
+        return true;
+      }
+      return false;
     },
 
     startHypeTrain() {
@@ -32,7 +42,7 @@ export const useDonationStore = defineStore('donation', {
       this.hypeTrainLevel = 1;
       this.hypeTrainProgress = 0;
       this.hypeTrainGoal = 100;
-      this.hypeTrainTimeRemaining = 300;
+      this.hypeTrainTimeRemaining = 300; // 5 minutes in seconds
 
       this.hypeTrainIntervalId = setInterval(() => {
         if (this.hypeTrainTimeRemaining > 0) {
@@ -52,9 +62,9 @@ export const useDonationStore = defineStore('donation', {
 
     levelUpHypeTrain() {
       this.hypeTrainLevel++;
-      this.hypeTrainProgress -= this.hypeTrainGoal;
+      this.hypeTrainProgress = this.hypeTrainProgress - this.hypeTrainGoal;
       this.hypeTrainGoal = Math.round(this.hypeTrainGoal * 1.5);
-      this.hypeTrainTimeRemaining = 300;
+      this.hypeTrainTimeRemaining = 300; // Reset to 5 minutes
       this.chatMessages.push(`Hype Train reached Level ${this.hypeTrainLevel}!`);
     },
 
