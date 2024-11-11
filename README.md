@@ -1,6 +1,6 @@
 # Kick Interactive Prototype
 
-[Preview the app here: Kick Interactive Prototype](#)
+[Preview the app here: Kick Interactive Prototype](https://roadrunner21.github.io/ts-kick-interactive-prototype/)
 
 ## Project Overview
 This project is an interactive prototype created to demonstrate community-driven features inspired by popular streaming platforms. It’s built with Vue 3, TypeScript, and Vite. The goal is to showcase engagement features that could enhance the community experience for platforms like Kick.com.
@@ -27,7 +27,7 @@ This project is an interactive prototype created to demonstrate community-driven
 - **GitHub Actions**: Automates build and deployment to GitHub Pages.
 
 ## How to Preview
-You can preview the live prototype [here](#).
+You can preview the live prototype [here](https://roadrunner21.github.io/ts-kick-interactive-prototype/).
 
 ## Installation & Setup
 To run locally, follow these steps:
