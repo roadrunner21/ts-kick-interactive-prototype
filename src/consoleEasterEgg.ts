@@ -8,7 +8,7 @@ export function showConsoleEasterEgg() {
     "color: #929EA6; font-size: 12px;"
   );
   console.log(
-    "%cReady to elevate Kick to new heights? 🚀 Let's connect and make it happen:\n%chttps://easygo.io/pages/careers/",
+    "%cReady to elevate Kick to new heights? 🚀 Let's connect and make it happen:\n%chttps://easygo.io/pages/job-opportunities?s=&department=Engineering",
     "color: #929EA6; font-size: 12px;",
     "color: #53FC18; font-size: 12px; font-weight: bold;"
   );
