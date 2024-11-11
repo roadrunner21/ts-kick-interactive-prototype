@@ -1,4 +1,4 @@
-// stores/donationStore.ts
+// src/stores/donationStore.ts
 
 import { defineStore } from 'pinia';
 
@@ -8,10 +8,12 @@ export const useDonationStore = defineStore('donation', {
     hypeTrainActive: false,
     hypeTrainLevel: 0,
     hypeTrainProgress: 0,
-    hypeTrainGoal: 100, // Initial goal for Level 1
+    hypeTrainGoal: 100,
     hypeTrainTimeRemaining: 0,
     hypeTrainIntervalId: null as null | number,
     chatMessages: [] as string[],
+    hypeTrainEndedRecently: false,
+    hypeTrainEndTimeoutId: null as null | number
   }),
 
   actions: {
@@ -30,7 +32,7 @@ export const useDonationStore = defineStore('donation', {
       this.hypeTrainLevel = 1;
       this.hypeTrainProgress = 0;
       this.hypeTrainGoal = 100;
-      this.hypeTrainTimeRemaining = 300; // 5 minutes in seconds
+      this.hypeTrainTimeRemaining = 300;
 
       this.hypeTrainIntervalId = setInterval(() => {
         if (this.hypeTrainTimeRemaining > 0) {
@@ -50,9 +52,9 @@ export const useDonationStore = defineStore('donation', {
 
     levelUpHypeTrain() {
       this.hypeTrainLevel++;
-      this.hypeTrainProgress = this.hypeTrainProgress - this.hypeTrainGoal;
+      this.hypeTrainProgress -= this.hypeTrainGoal;
       this.hypeTrainGoal = Math.round(this.hypeTrainGoal * 1.5);
-      this.hypeTrainTimeRemaining = 300; // Reset to 5 minutes
+      this.hypeTrainTimeRemaining = 300;
       this.chatMessages.push(`Hype Train reached Level ${this.hypeTrainLevel}!`);
     },
 
@@ -66,6 +68,12 @@ export const useDonationStore = defineStore('donation', {
         this.hypeTrainIntervalId = null;
       }
       this.chatMessages.push('Hype Train has ended.');
+      this.hypeTrainEndedRecently = true;
+
+      this.hypeTrainEndTimeoutId = setTimeout(() => {
+        this.hypeTrainEndedRecently = false;
+        this.hypeTrainEndTimeoutId = null;
+      }, 60000);
     },
   },
 

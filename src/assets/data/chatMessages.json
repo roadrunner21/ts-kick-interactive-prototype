@@ -1,0 +1,34 @@
+[
+  {
+    "text": "This stream is awesome!",
+    "sentiment": "positive"
+  },
+  {
+    "text": "Hahaha kekw",
+    "sentiment": "positive"
+  },
+  {
+    "text": "Not again... FeelsBadMan",
+    "sentiment": "negative"
+  },
+  {
+    "text": "Hello everyone",
+    "sentiment": "neutral"
+  },
+  {
+    "text": "Epic! PogChamp",
+    "sentiment": "positive"
+  },
+  {
+    "text": "This game is lit omegalul",
+    "sentiment": "positive"
+  },
+  {
+    "text": "Is this live?",
+    "sentiment": "neutral"
+  },
+  {
+    "text": "I'm out, this is boring.",
+    "sentiment": "negative"
+  }
+]

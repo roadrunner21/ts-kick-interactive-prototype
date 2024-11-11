@@ -11,6 +11,16 @@
     <div class="w-full p-4 text-center">
       <h1 class="text-2xl font-semibold mb-4">Support the Streamer</h1>
       <DonationButtons />
+
+      <div class="mt-4">
+        <label for="messageRate" class="mr-2">Chat Speed:</label>
+        <select id="messageRate" v-model="messageRate" @change="changeMessageRate">
+          <option value="5000">Slow</option>
+          <option value="2000">Normal</option>
+          <option value="1000">Fast</option>
+          <option value="500">Very Fast</option>
+        </select>
+      </div>
     </div>
 
     <!-- Main Container: Stream and Chat -->
@@ -35,6 +45,7 @@ import { defineComponent } from 'vue';
 import Stream from './components/Stream.vue';
 import Chat from './components/Chat.vue';
 import DonationButtons from './components/DonationButtons.vue';
+import { updateMessageInterval } from "./chatLogic.ts";
 
 export default defineComponent({
   name: 'App',
@@ -42,6 +53,16 @@ export default defineComponent({
     Stream,
     Chat,
     DonationButtons,
+  },
+  data() {
+    return {
+      messageRate: '2000', // Default to Normal speed
+    };
+  },
+  methods: {
+    changeMessageRate() {
+      updateMessageInterval(parseInt(this.messageRate));
+    },
   },
 });
 </script>
