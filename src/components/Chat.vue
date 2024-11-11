@@ -6,19 +6,28 @@
     <div class="border-b border-kick-border pb-2 mb-2">
       <p class="text-white font-semibold">Chat</p>
     </div>
-    <!-- Chat Messages Placeholder -->
-    <p class="text-white text-center">Chat</p>
+    <!-- Chat Messages -->
+    <div class="text-white">
+      <div v-for="(message, index) in donationStore.chatMessages" :key="index" class="mb-1">
+        {{ message }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useDonationStore } from '../stores/donationStore';
 
 export default defineComponent({
   name: 'Chat',
+  setup() {
+    const donationStore = useDonationStore();
+    return { donationStore };
+  },
 });
 </script>
 
 <style scoped>
-/* Component-specific styles (if any) */
+/* No additional styles needed */
 </style>

@@ -5,7 +5,6 @@
     <!-- Header with Kick Logo -->
     <header class="w-full p-4 flex justify-start items-center">
       <img src="https://kick.com/img/kick-logo.svg" alt="Kick Logo" class="h-8">
-      <!-- Additional navigation items can be added here -->
     </header>
 
     <!-- Donation Buttons Section -->
@@ -48,5 +47,5 @@ export default defineComponent({
 </script>
 
 <style>
-/* No additional styles needed as Tailwind is handling styles */
+/* No additional styles needed */
 </style>
