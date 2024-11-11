@@ -1,16 +1,18 @@
+// src/stores/donationStore.ts
+
 import { defineStore } from 'pinia';
+import { useChatStore } from './chatStore';
 
 export const useDonationStore = defineStore('donation', {
   state: () => ({
     totalDonation: 0,
-    channelPoints: 0,
     hypeTrainActive: false,
     hypeTrainLevel: 0,
     hypeTrainProgress: 0,
     hypeTrainGoal: 100,
     hypeTrainTimeRemaining: 0,
     hypeTrainIntervalId: null as null | number,
-    chatMessages: [] as string[],
+    // Removed chatMessages and channelPoints
     hypeTrainEndedRecently: false,
     hypeTrainEndTimeoutId: null as null | number,
   }),
@@ -18,10 +20,15 @@ export const useDonationStore = defineStore('donation', {
   actions: {
     addDonation(amount: number) {
       this.totalDonation += amount;
-      this.chatMessages.push(`User123 donated $${amount}!`);
 
-      // Add channel points based on donation
-      this.channelPoints += amount; // Example: 1 point per dollar donated
+      const chatStore = useChatStore();
+      chatStore.addMessage({
+        username: 'System',
+        text: `User123 donated $${amount}!`,
+      });
+
+      // If you decide to keep channel points, manage them here
+      // this.channelPoints += amount; // Example: 1 point per dollar donated
 
       if (!this.hypeTrainActive) {
         this.startHypeTrain();
@@ -29,11 +36,13 @@ export const useDonationStore = defineStore('donation', {
       this.updateHypeTrainProgress(amount);
     },
 
-    redeemChannelPoints(points: number): boolean {
-      if (this.channelPoints >= points) {
-        this.channelPoints -= points;
-        return true;
-      }
+    redeemChannelPoints(): boolean {
+      // If channel points are removed, you can delete this method
+      // Otherwise, implement logic here
+      // if (this.channelPoints >= points) {
+      //   this.channelPoints -= points;
+      //   return true;
+      // }
       return false;
     },
 
@@ -44,7 +53,7 @@ export const useDonationStore = defineStore('donation', {
       this.hypeTrainGoal = 100;
       this.hypeTrainTimeRemaining = 300; // 5 minutes in seconds
 
-      this.hypeTrainIntervalId = setInterval(() => {
+      this.hypeTrainIntervalId = window.setInterval(() => {
         if (this.hypeTrainTimeRemaining > 0) {
           this.hypeTrainTimeRemaining--;
         } else {
@@ -62,10 +71,15 @@ export const useDonationStore = defineStore('donation', {
 
     levelUpHypeTrain() {
       this.hypeTrainLevel++;
-      this.hypeTrainProgress = this.hypeTrainProgress - this.hypeTrainGoal;
+      this.hypeTrainProgress -= this.hypeTrainGoal;
       this.hypeTrainGoal = Math.round(this.hypeTrainGoal * 1.5);
       this.hypeTrainTimeRemaining = 300; // Reset to 5 minutes
-      this.chatMessages.push(`Hype Train reached Level ${this.hypeTrainLevel}!`);
+
+      const chatStore = useChatStore();
+      chatStore.addMessage({
+        username: 'System',
+        text: `Hype Train reached Level ${this.hypeTrainLevel}!`,
+      });
     },
 
     endHypeTrain() {
@@ -77,13 +91,19 @@ export const useDonationStore = defineStore('donation', {
         clearInterval(this.hypeTrainIntervalId);
         this.hypeTrainIntervalId = null;
       }
-      this.chatMessages.push('Hype Train has ended.');
+
+      const chatStore = useChatStore();
+      chatStore.addMessage({
+        username: 'System',
+        text: 'Hype Train has ended.',
+      });
+
       this.hypeTrainEndedRecently = true;
 
-      this.hypeTrainEndTimeoutId = setTimeout(() => {
+      this.hypeTrainEndTimeoutId = window.setTimeout(() => {
         this.hypeTrainEndedRecently = false;
         this.hypeTrainEndTimeoutId = null;
-      }, 60000);
+      }, 60000); // 1 minute cooldown
     },
   },
 

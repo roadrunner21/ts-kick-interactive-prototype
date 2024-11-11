@@ -3,11 +3,11 @@
 import { ref, computed } from 'vue';
 import chatMessagesData from './assets/data/chatMessages.json';
 import usernamesData from './assets/data/usernames.json';
-import emotesData from './assets/data/emotes.json'; // TypeScript infers the type from JSON
+import emotesData from './assets/data/emotes.json';
 import { useDonationStore } from './stores/donationStore';
+import { useChatStore } from './stores/chatStore';
 
-export const chatMessages = ref<any[]>([]);
-const messageInterval = ref(2000); // Default interval
+const messageInterval = ref(2000); // Default interval in milliseconds
 
 const currentSentiment = computed(() => {
   const donationStore = useDonationStore();
@@ -22,7 +22,6 @@ const currentSentiment = computed(() => {
 
 function replaceEmotes(text: string): string {
   return text.replace(/\b\w+\b/g, (word) => {
-    // No need for casting; TypeScript infers emotesData as a dictionary of strings
     if (emotesData[word as keyof typeof emotesData]) {
       return `<img src="${emotesData[word as keyof typeof emotesData]}" alt="${word}" class="emote">`;
     }
@@ -31,9 +30,13 @@ function replaceEmotes(text: string): string {
 }
 
 function addChatMessage() {
+  const chatStore = useChatStore();
   const sentimentMessages = chatMessagesData.filter(
     (msg) => msg.sentiment === currentSentiment.value
   );
+
+  if (sentimentMessages.length === 0) return; // Prevent errors if no messages match
+
   const randomMessage =
     sentimentMessages[Math.floor(Math.random() * sentimentMessages.length)];
   const randomUsername =
@@ -41,20 +44,16 @@ function addChatMessage() {
 
   const processedMessage = replaceEmotes(randomMessage.text);
 
-  chatMessages.value.push({
+  chatStore.addMessage({
     username: randomUsername,
     text: processedMessage,
   });
-
-  if (chatMessages.value.length > 100) {
-    chatMessages.value.shift();
-  }
 }
 
 let chatIntervalId: number;
 
 export function startChatSimulation() {
-  chatIntervalId = setInterval(addChatMessage, messageInterval.value);
+  chatIntervalId = window.setInterval(addChatMessage, messageInterval.value);
 }
 
 export function stopChatSimulation() {
@@ -66,4 +65,3 @@ export function updateMessageInterval(newInterval: number) {
   stopChatSimulation();
   startChatSimulation();
 }
-

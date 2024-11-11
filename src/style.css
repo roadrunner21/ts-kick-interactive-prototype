@@ -8,4 +8,25 @@
     body {
         @apply bg-kick-bg text-kick-text font-sans;
     }
+
+    /* Global scrollbar styles */
+    /* For WebKit-based browsers */
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #E5E7EB; /* kick-border color */
+        border-radius: 3px;
+    }
+
+    /* For Firefox */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #E5E7EB transparent;
+    }
 }
