@@ -6,7 +6,7 @@ import usernamesData from './assets/data/usernames.json';
 import emotesData from './assets/data/emotes.json'; // TypeScript infers the type from JSON
 import { useDonationStore } from './stores/donationStore';
 
-const chatMessages = ref<any[]>([]);
+export const chatMessages = ref<any[]>([]);
 const messageInterval = ref(2000); // Default interval
 
 const currentSentiment = computed(() => {
@@ -53,11 +53,11 @@ function addChatMessage() {
 
 let chatIntervalId: number;
 
-function startChatSimulation() {
+export function startChatSimulation() {
   chatIntervalId = setInterval(addChatMessage, messageInterval.value);
 }
 
-function stopChatSimulation() {
+export function stopChatSimulation() {
   clearInterval(chatIntervalId);
 }
 
