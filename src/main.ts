@@ -5,7 +5,7 @@ import App from './App.vue';
 import { createPinia } from 'pinia';
 import './style.css';
 import { showConsoleEasterEgg } from './consoleEasterEgg';
-import { initializeChatLogic, startChatSimulation } from './chatLogic';
+import { initializeChatLogic } from './chatLogic';
 
 if (import.meta.env.PROD) {
   showConsoleEasterEgg();
@@ -19,8 +19,5 @@ app.use(pinia);
 
 // Initialize chat logic with pinia
 initializeChatLogic(pinia);
-
-// Start chat simulation after initialization
-startChatSimulation();
 
 app.mount('#app');

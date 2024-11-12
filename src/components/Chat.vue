@@ -49,13 +49,10 @@ import {
   ref,
   watch,
   nextTick,
-  onBeforeUpdate,
-  onUpdated,
 } from 'vue';
 import { startChatSimulation, stopChatSimulation } from '../chatLogic';
 import { useChatStore } from '../stores/chatStore';
 import ChatMessage from './ChatMessage.vue';
-import type { ChatMessage as ChatMessageType } from '../stores/chatStore';
 
 export default defineComponent({
   name: 'Chat',
@@ -68,17 +65,6 @@ export default defineComponent({
     const isAutoScroll = ref(true);
 
     const displayedChatMessages = computed(() => chatStore.messages);
-
-    // References to track previous messages and height of removed message
-    const previousMessages = ref<ChatMessageType[]>([]);
-    const previousFirstMessageHeight = ref(0);
-
-    // ResizeObserver to handle dynamic content changes (e.g., image loads)
-    const resizeObserver = new ResizeObserver(() => {
-      if (isAutoScroll.value) {
-        scrollToBottom();
-      }
-    });
 
     // Function to scroll to the bottom of the chat
     function scrollToBottom() {
@@ -111,30 +97,6 @@ export default defineComponent({
       }
     }
 
-    // Before the update, check if a message is about to be removed
-    onBeforeUpdate(() => {
-      if (previousMessages.value.length > displayedChatMessages.value.length) {
-        // A message is about to be removed from the top
-        if (chatContainer.value) {
-          const firstMessage = chatContainer.value.querySelector('.chat-message');
-          if (firstMessage) {
-            previousFirstMessageHeight.value = firstMessage.getBoundingClientRect().height;
-          }
-        }
-      }
-    });
-
-    // After the update, adjust scrollTop if a message was removed
-    onUpdated(() => {
-      if (previousMessages.value.length > displayedChatMessages.value.length) {
-        if (chatContainer.value) {
-          chatContainer.value.scrollTop -= previousFirstMessageHeight.value;
-        }
-      }
-      // Update previousMessages to current messages
-      previousMessages.value = displayedChatMessages.value.slice();
-    });
-
     // Watch for new messages to auto-scroll if enabled
     watch(displayedChatMessages, async () => {
       if (isAutoScroll.value) {
@@ -143,23 +105,15 @@ export default defineComponent({
       }
     });
 
-    // Initialize chat simulation and observe container
+    // Initialize chat simulation
     onMounted(() => {
       startChatSimulation();
       scrollToBottom();
-
-      if (chatContainer.value) {
-        resizeObserver.observe(chatContainer.value);
-      }
-      previousMessages.value = displayedChatMessages.value.slice();
     });
 
     // Cleanup on component unmount
     onUnmounted(() => {
       stopChatSimulation();
-      if (chatContainer.value) {
-        resizeObserver.unobserve(chatContainer.value);
-      }
     });
 
     return {
