@@ -10,6 +10,7 @@
             :src="emotesData[word]"
             :alt="word"
             class="h-8 w-8 inline align-middle"
+            @load="notifyContentChanged"
         />
         <span v-else>{{ word }}</span>
         <span v-if="index < words.length - 1"> </span>
@@ -19,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { emotesData } from '../assets/data/emotes';
 
 export default defineComponent({
@@ -34,13 +35,18 @@ export default defineComponent({
       required: true,
     },
   },
-  computed: {
-    words(): string[] {
-      return this.text.split(/(\s+)/);
-    },
-    emotesData() {
-      return emotesData;
-    },
+  setup(props, { emit }) {
+    const words = computed(() => props.text.split(/(\s+)/));
+
+    function notifyContentChanged() {
+      emit('contentChanged');
+    }
+
+    return {
+      words,
+      emotesData,
+      notifyContentChanged,
+    };
   },
 });
 </script>

@@ -18,6 +18,7 @@
             :key="index"
             :username="message.username"
             :text="message.text"
+            @contentChanged="handleContentChange"
         />
       </div>
     </div>
@@ -32,7 +33,7 @@
     >
       <div
           v-if="!isAutoScroll"
-          class="absolute bottom-4 left-1/2 transform -translate-x-1/2 p-2 bg-gray-800 bg-opacity-90 text-center cursor-pointer rounded animate-fadeInUp"
+          class="absolute bottom-4 left-1/2 transform -translate-x-1/2 p-2 bg-gray-800 bg-opacity-90 text-center cursor-pointer rounded"
           @click="enableAutoScroll"
       >
         <p class="text-white text-sm">Autoscroll disabled. Click to show new messages.</p>
@@ -59,10 +60,8 @@ export default defineComponent({
 
     const displayedChatMessages = computed(() => chatStore.messages);
 
-    // Watch for new messages
-    watch(displayedChatMessages, async () => {
+    const resizeObserver = new ResizeObserver(() => {
       if (isAutoScroll.value) {
-        await nextTick();
         scrollToBottom();
       }
     });
@@ -81,19 +80,39 @@ export default defineComponent({
     function onScroll() {
       if (chatContainer.value) {
         const { scrollTop, scrollHeight, clientHeight } = chatContainer.value;
-        const buffer = 50; // pixels
+        const buffer = 50;
 
         isAutoScroll.value = scrollTop + clientHeight >= scrollHeight - buffer;
+      }
+    }
+
+    function handleContentChange() {
+      if (isAutoScroll.value) {
+        nextTick(scrollToBottom);
       }
     }
 
     onMounted(() => {
       startChatSimulation();
       scrollToBottom();
+
+      if (chatContainer.value) {
+        resizeObserver.observe(chatContainer.value);
+      }
     });
 
     onUnmounted(() => {
       stopChatSimulation();
+      if (chatContainer.value) {
+        resizeObserver.unobserve(chatContainer.value);
+      }
+    });
+
+    watch(displayedChatMessages, async () => {
+      if (isAutoScroll.value) {
+        await nextTick();
+        scrollToBottom();
+      }
     });
 
     return {
@@ -102,6 +121,7 @@ export default defineComponent({
       isAutoScroll,
       enableAutoScroll,
       onScroll,
+      handleContentChange,
     };
   },
 });
