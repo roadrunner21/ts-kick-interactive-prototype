@@ -12,7 +12,6 @@ export const useDonationStore = defineStore('donation', {
     hypeTrainGoal: 100,
     hypeTrainTimeRemaining: 0,
     hypeTrainIntervalId: null as null | number,
-    // Removed chatMessages and channelPoints
     hypeTrainEndedRecently: false,
     hypeTrainEndTimeoutId: null as null | number,
   }),
@@ -27,23 +26,10 @@ export const useDonationStore = defineStore('donation', {
         text: `User123 donated $${amount}!`,
       });
 
-      // If you decide to keep channel points, manage them here
-      // this.channelPoints += amount; // Example: 1 point per dollar donated
-
       if (!this.hypeTrainActive) {
         this.startHypeTrain();
       }
       this.updateHypeTrainProgress(amount);
-    },
-
-    redeemChannelPoints(): boolean {
-      // If channel points are removed, you can delete this method
-      // Otherwise, implement logic here
-      // if (this.channelPoints >= points) {
-      //   this.channelPoints -= points;
-      //   return true;
-      // }
-      return false;
     },
 
     startHypeTrain() {
@@ -113,7 +99,9 @@ export const useDonationStore = defineStore('donation', {
     },
 
     currentSmileyEmotion(state) {
-      if (!state.hypeTrainActive) {
+      if (state.hypeTrainEndedRecently) {
+        return 'sad';
+      } else if (!state.hypeTrainActive) {
         return 'neutral';
       } else if (state.hypeTrainLevel >= 3) {
         return 'ecstatic';
