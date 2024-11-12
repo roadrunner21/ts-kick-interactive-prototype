@@ -4,8 +4,8 @@
     <span>
       <template v-for="(word, index) in words" :key="index">
         <img
-            v-if="emotesData[word]"
-            :src="emotesData[word]"
+            v-if="emotesData[word.toLowerCase()]"
+            :src="emotesData[word.toLowerCase()]"
             :alt="word"
             class="h-8 w-8 inline align-middle"
             @load="notifyContentChanged"
