@@ -1,4 +1,5 @@
 // src/stores/donationStore.ts
+
 import { defineStore } from 'pinia';
 import { useChatStore } from './chatStore';
 
@@ -9,10 +10,10 @@ export const useDonationStore = defineStore('donation', {
     hypeTrainLevel: 0,
     hypeTrainProgress: 0,
     hypeTrainGoal: 100,
-    hypeTrainTimeRemaining: 0,
+    hypeTrainTimeRemaining: 20, // Start with 20 seconds
     hypeTrainIntervalId: null as null | number,
+    hypeTrainCooldownId: null as null | number,
     hypeTrainEndedRecently: false,
-    hypeTrainEndTimeoutId: null as null | number,
   }),
 
   actions: {
@@ -20,14 +21,16 @@ export const useDonationStore = defineStore('donation', {
       this.totalDonation += amount;
       const chatStore = useChatStore();
       chatStore.addMessage({
-        username: 'System',
-        text: `User123 donated $${amount}!`,
+        username: 'User123',
+        text: `donated $${amount}!`,
       });
 
-      if (!this.hypeTrainActive) {
+      if (!this.hypeTrainActive && !this.hypeTrainEndedRecently) {
         this.startHypeTrain();
       }
-      this.updateHypeTrainProgress(amount);
+      if (this.hypeTrainActive) {
+        this.updateHypeTrainProgress(amount);
+      }
     },
 
     startHypeTrain() {
@@ -35,7 +38,7 @@ export const useDonationStore = defineStore('donation', {
       this.hypeTrainLevel = 1;
       this.hypeTrainProgress = 0;
       this.hypeTrainGoal = 100;
-      this.hypeTrainTimeRemaining = 300; // 5 minutes in seconds
+      this.hypeTrainTimeRemaining = 20; // 20 seconds countdown
 
       this.hypeTrainIntervalId = window.setInterval(() => {
         if (this.hypeTrainTimeRemaining > 0) {
@@ -44,6 +47,12 @@ export const useDonationStore = defineStore('donation', {
           this.endHypeTrain();
         }
       }, 1000);
+
+      const chatStore = useChatStore();
+      chatStore.addMessage({
+        username: 'System',
+        text: `🚂 Hype Train has started!`,
+      });
     },
 
     updateHypeTrainProgress(amount: number) {
@@ -57,20 +66,17 @@ export const useDonationStore = defineStore('donation', {
       this.hypeTrainLevel++;
       this.hypeTrainProgress -= this.hypeTrainGoal;
       this.hypeTrainGoal = Math.round(this.hypeTrainGoal * 1.5);
-      this.hypeTrainTimeRemaining = 300; // Reset to 5 minutes
+      this.hypeTrainTimeRemaining = 20; // Reset to 20 seconds
 
       const chatStore = useChatStore();
       chatStore.addMessage({
         username: 'System',
-        text: `Hype Train reached Level ${this.hypeTrainLevel}!`,
+        text: `🎉 Hype Train reached Level ${this.hypeTrainLevel}!`,
       });
     },
 
     endHypeTrain() {
       this.hypeTrainActive = false;
-      this.hypeTrainLevel = 0;
-      this.hypeTrainProgress = 0;
-      this.hypeTrainGoal = 100;
       if (this.hypeTrainIntervalId !== null) {
         clearInterval(this.hypeTrainIntervalId);
         this.hypeTrainIntervalId = null;
@@ -79,14 +85,32 @@ export const useDonationStore = defineStore('donation', {
       const chatStore = useChatStore();
       chatStore.addMessage({
         username: 'System',
-        text: 'Hype Train has ended.',
+        text: '🚂 Hype Train has ended.',
       });
 
       this.hypeTrainEndedRecently = true;
-      this.hypeTrainEndTimeoutId = window.setTimeout(() => {
+      this.hypeTrainCooldownId = window.setTimeout(() => {
         this.hypeTrainEndedRecently = false;
-        this.hypeTrainEndTimeoutId = null;
+        this.hypeTrainCooldownId = null;
       }, 60000); // 1 minute cooldown
+    },
+
+    resetHypeTrain() {
+      // Optional: If you need to reset Hype Train manually
+      this.hypeTrainActive = false;
+      this.hypeTrainLevel = 0;
+      this.hypeTrainProgress = 0;
+      this.hypeTrainGoal = 100;
+      this.hypeTrainTimeRemaining = 20;
+      if (this.hypeTrainIntervalId !== null) {
+        clearInterval(this.hypeTrainIntervalId);
+        this.hypeTrainIntervalId = null;
+      }
+      if (this.hypeTrainCooldownId !== null) {
+        clearTimeout(this.hypeTrainCooldownId);
+        this.hypeTrainCooldownId = null;
+      }
+      this.hypeTrainEndedRecently = false;
     },
   },
 
