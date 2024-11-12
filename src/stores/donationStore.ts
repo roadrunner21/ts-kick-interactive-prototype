@@ -1,5 +1,4 @@
 // src/stores/donationStore.ts
-
 import { defineStore } from 'pinia';
 import { useChatStore } from './chatStore';
 
@@ -19,7 +18,6 @@ export const useDonationStore = defineStore('donation', {
   actions: {
     addDonation(amount: number) {
       this.totalDonation += amount;
-
       const chatStore = useChatStore();
       chatStore.addMessage({
         username: 'System',
@@ -85,7 +83,6 @@ export const useDonationStore = defineStore('donation', {
       });
 
       this.hypeTrainEndedRecently = true;
-
       this.hypeTrainEndTimeoutId = window.setTimeout(() => {
         this.hypeTrainEndedRecently = false;
         this.hypeTrainEndTimeoutId = null;
@@ -96,22 +93,6 @@ export const useDonationStore = defineStore('donation', {
   getters: {
     hypeTrainProgressPercentage(state) {
       return (state.hypeTrainProgress / state.hypeTrainGoal) * 100;
-    },
-
-    currentSmileyEmotion(state) {
-      if (state.hypeTrainEndedRecently) {
-        return 'sad';
-      } else if (!state.hypeTrainActive) {
-        return 'neutral';
-      } else if (state.hypeTrainLevel >= 3) {
-        return 'ecstatic';
-      } else if (state.hypeTrainLevel === 2) {
-        return 'very-happy';
-      } else if (state.hypeTrainLevel === 1) {
-        return 'happy';
-      } else {
-        return 'neutral';
-      }
     },
   },
 });

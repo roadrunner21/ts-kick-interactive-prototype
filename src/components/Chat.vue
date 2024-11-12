@@ -2,16 +2,10 @@
 
 <template>
   <div class="bg-kick-bg rounded-lg flex flex-col h-full relative">
-    <!-- Chat Header -->
     <div class="border-b border-kick-border p-2">
       <p class="text-white font-semibold">Chat</p>
     </div>
-    <!-- Chat Messages - Scrollable Content -->
-    <div
-        ref="chatContainer"
-        class="flex-1 overflow-y-auto p-2"
-        @scroll="onScroll"
-    >
+    <div ref="chatContainer" class="flex-1 overflow-y-auto p-2" @scroll="onScroll">
       <div class="text-white text-sm space-y-1">
         <ChatMessage
             v-for="(message, index) in displayedChatMessages"
@@ -19,11 +13,9 @@
             :username="message.username"
             :text="message.text"
         />
-        <!-- Sentinel Element -->
         <div ref="sentinel"></div>
       </div>
     </div>
-    <!-- Autoscroll Notification -->
     <transition
         enter-active-class="transition-opacity duration-500"
         enter-from-class="opacity-0"
@@ -96,7 +88,7 @@ export default defineComponent({
     watch(displayedChatMessages, async () => {
       if (isAutoScroll.value) {
         await nextTick();
-        scrollToBottom(true); // Jump to the bottom when a new message is added and autoscroll is active
+        scrollToBottom(true);
       }
     });
 
@@ -108,14 +100,13 @@ export default defineComponent({
 
     function enableAutoScroll() {
       isAutoScroll.value = true;
-      scrollToBottom(true); // Instantly scroll to the bottom when clicking the disclaimer
+      scrollToBottom(true);
     }
 
     function onScroll() {
       if (chatContainer.value && sentinel.value) {
         const isAtBottom =
             chatContainer.value.scrollHeight - chatContainer.value.scrollTop <= chatContainer.value.clientHeight + 10;
-
         isAutoScroll.value = isAtBottom;
       }
     }

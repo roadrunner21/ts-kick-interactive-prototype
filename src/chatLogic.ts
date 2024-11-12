@@ -3,26 +3,24 @@
 import { ref, computed } from 'vue';
 import { chatMessagesData } from './assets/data/chatMessages';
 import { usernamesData } from './assets/data/usernames';
-import { useDonationStore } from './stores/donationStore';
 import { useChatStore } from './stores/chatStore';
+import { useSentimentStore } from './stores/sentimentStore';
+import type { Pinia } from 'pinia';
 
 const messageInterval = ref(2000); // Default interval in milliseconds
 
-// Determine the sentiment based on hype train state
-const currentSentiment = computed(() => {
-  const donationStore = useDonationStore();
-  if (donationStore.hypeTrainActive) {
-    return 'positive';
-  } else if (donationStore.hypeTrainEndedRecently) {
-    return 'negative';
-  } else {
-    return 'neutral';
-  }
-});
+let chatStore: ReturnType<typeof useChatStore>;
+let sentimentStore: ReturnType<typeof useSentimentStore>;
 
-// Add a new raw chat message to the chat store
+// Initialize stores with provided pinia instance
+export function initializeChatLogic(pinia: Pinia) {
+  chatStore = useChatStore(pinia);
+  sentimentStore = useSentimentStore(pinia);
+}
+
+const currentSentiment = computed(() => sentimentStore.currentSentiment);
+
 function addChatMessage() {
-  const chatStore = useChatStore();
   const sentimentMessages = chatMessagesData.filter(
     (msg) => msg.sentiment === currentSentiment.value
   );
@@ -42,17 +40,14 @@ function addChatMessage() {
 
 let chatIntervalId: number;
 
-// Start the simulation of chat messages
 export function startChatSimulation() {
   chatIntervalId = window.setInterval(addChatMessage, messageInterval.value);
 }
 
-// Stop the chat message simulation
 export function stopChatSimulation() {
   clearInterval(chatIntervalId);
 }
 
-// Update the message interval dynamically
 export function updateMessageInterval(newInterval: number) {
   messageInterval.value = newInterval;
   stopChatSimulation();

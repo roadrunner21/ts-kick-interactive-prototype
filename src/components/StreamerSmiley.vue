@@ -1,5 +1,3 @@
-<!-- StreamerSmiley.vue -->
-
 <template>
   <div class="flex items-center justify-center">
     <svg
@@ -12,7 +10,7 @@
       <rect x="0" y="0" width="24" height="24" fill="#FFDD67" />
 
       <!-- Eyes -->
-      <template v-if="emotion === 'ecstatic'">
+      <template v-if="emotion === Emotion.ECSTATIC">
         <!-- Dollar Sign Eyes -->
         <text x="5" y="11" font-size="8" fill="#000" font-weight="bold">$</text>
         <text x="13" y="11" font-size="8" fill="#000" font-weight="bold">$</text>
@@ -26,7 +24,7 @@
       <!-- Mouth -->
       <!-- Ecstatic -->
       <path
-          v-if="emotion === 'ecstatic'"
+          v-if="emotion === Emotion.ECSTATIC"
           d="M4 12 Q12 24, 20 12"
           stroke="#000"
           stroke-width="1"
@@ -34,7 +32,7 @@
       />
       <!-- Very Happy -->
       <path
-          v-else-if="emotion === 'very-happy'"
+          v-else-if="emotion === Emotion.VERY_HAPPY"
           d="M6 14 Q12 22, 18 14"
           stroke="#000"
           stroke-width="1"
@@ -42,7 +40,7 @@
       />
       <!-- Happy -->
       <path
-          v-else-if="emotion === 'happy'"
+          v-else-if="emotion === Emotion.HAPPY"
           d="M8 16 Q12 20, 16 16"
           stroke="#000"
           stroke-width="1"
@@ -50,7 +48,7 @@
       />
       <!-- Sad -->
       <path
-          v-else-if="emotion === 'sad'"
+          v-else-if="emotion === Emotion.SAD"
           d="M8 18 Q12 14, 16 18"
           stroke="#000"
           stroke-width="1"
@@ -70,17 +68,21 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-
-type EmotionType = 'happy' | 'very-happy' | 'ecstatic' | 'neutral' | 'sad';
+import { Emotion } from '../types/sentimentTypes';
 
 export default defineComponent({
   name: 'StreamerSmiley',
+  computed: {
+    Emotion() {
+      return Emotion
+    }
+  },
   props: {
     emotion: {
-      type: String as PropType<EmotionType>,
-      default: 'neutral',
-      validator: (value: string): boolean => {
-        return ['happy', 'very-happy', 'ecstatic', 'neutral', 'sad'].includes(value);
+      type: String as PropType<Emotion>,
+      default: Emotion.NEUTRAL,
+      validator: (value: Emotion): boolean => {
+        return Object.values(Emotion).includes(value);
       },
     },
   },
