@@ -9,16 +9,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Kick's color palette
-        'kick-bg': '#141517',             // Background color
-        'kick-text': '#FFFFFF',           // Text color (white)
-        'kick-highlight': '#53FC18',      // Highlight color (links, viewer count)
-        'kick-label': '#929EA6',          // Label color (e.g., 'viewers' label)
-        'kick-border': '#E5E7EB',         // Border color
+        // Existing color palette
+        'kick-bg': '#141517',
+        'kick-text': '#FFFFFF',
+        'kick-highlight': '#53FC18',
+        'kick-label': '#929EA6',
+        'kick-border': '#E5E7EB',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],  // Set Inter as the default sans font
+        sans: ['Inter', 'sans-serif'],
       },
+      // You can add custom keyframes or animations here if you want to
     },
   },
   plugins: [

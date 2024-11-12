@@ -1,7 +1,7 @@
 <!-- src/components/Stream.vue -->
 
 <template>
-  <div class="aspect-w-16 aspect-h-9 rounded-lg flex flex-col items-center justify-center relative">
+  <div class="aspect-w-16 aspect-h-9 rounded-lg flex flex-col items-center justify-center relative vhs-effect">
     <StreamerSmiley :emotion="smileyEmotion" />
     <Hypetrain v-if="donationStore.hypeTrainActive" />
   </div>
