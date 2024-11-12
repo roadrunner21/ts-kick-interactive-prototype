@@ -2,7 +2,7 @@
   <div class="bg-kick-bg rounded-lg flex flex-col h-full relative">
     <!-- Chat Header -->
     <div class="border-b border-kick-border p-2">
-      <p class="text-white font-semibold">Chat</p>
+      <p class="text-white font-semibold text-center">Chat</p>
     </div>
     <!-- Chat Messages - Scrollable Content -->
     <div

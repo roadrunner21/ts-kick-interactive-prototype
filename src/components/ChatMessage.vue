@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-start">
+  <div class="flex items-center">
     <span class="font-semibold mr-1">{{ username }}:</span>
     <span>
       <template v-for="(word, index) in words" :key="index">
