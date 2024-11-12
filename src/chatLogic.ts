@@ -7,7 +7,7 @@ import { useChatStore } from './stores/chatStore';
 import { useSentimentStore } from './stores/sentimentStore';
 import type { Pinia } from 'pinia';
 
-const messageInterval = ref(200); // Default interval in milliseconds
+const messageInterval = ref(2000); // Default interval in milliseconds
 
 let chatStore: ReturnType<typeof useChatStore>;
 let sentimentStore: ReturnType<typeof useSentimentStore>;
