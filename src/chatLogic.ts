@@ -40,14 +40,20 @@ function addChatMessage() {
 
 let chatIntervalId: number;
 
+// Start chat simulation
 export function startChatSimulation() {
+  if (!chatStore || !sentimentStore) {
+    throw new Error('Chat logic not initialized. Call initializeChatLogic(pinia) first.');
+  }
   chatIntervalId = window.setInterval(addChatMessage, messageInterval.value);
 }
 
+// Stop chat simulation
 export function stopChatSimulation() {
   clearInterval(chatIntervalId);
 }
 
+// Update message interval
 export function updateMessageInterval(newInterval: number) {
   messageInterval.value = newInterval;
   stopChatSimulation();

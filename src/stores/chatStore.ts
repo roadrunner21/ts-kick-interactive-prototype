@@ -2,7 +2,8 @@
 
 import { defineStore } from 'pinia';
 
-interface ChatMessage {
+// Define and export the ChatMessage type for use in other files
+export interface ChatMessage {
   username: string;
   text: string;
 }

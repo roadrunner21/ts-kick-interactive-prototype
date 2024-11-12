@@ -1,7 +1,7 @@
 <!-- src/components/ChatMessage.vue -->
 
 <template>
-  <div class="flex items-start">
+  <div class="flex items-start chat-message">
     <span class="font-semibold mr-1">{{ username }}:</span>
     <span>
       <template v-for="(word, index) in words" :key="index">
@@ -50,3 +50,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+/* No additional styles needed */
+</style>

@@ -1,5 +1,3 @@
-<!-- src/components/Chat.vue -->
-
 <template>
   <div class="bg-kick-bg rounded-lg flex flex-col h-full relative">
     <!-- Chat Header -->
@@ -43,10 +41,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, computed, ref, watch, nextTick } from 'vue';
+import {
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  computed,
+  ref,
+  watch,
+  nextTick,
+  onBeforeUpdate,
+  onUpdated,
+} from 'vue';
 import { startChatSimulation, stopChatSimulation } from '../chatLogic';
 import { useChatStore } from '../stores/chatStore';
 import ChatMessage from './ChatMessage.vue';
+import type { ChatMessage as ChatMessageType } from '../stores/chatStore';
 
 export default defineComponent({
   name: 'Chat',
@@ -60,38 +69,81 @@ export default defineComponent({
 
     const displayedChatMessages = computed(() => chatStore.messages);
 
+    // References to track previous messages and height of removed message
+    const previousMessages = ref<ChatMessageType[]>([]);
+    const previousFirstMessageHeight = ref(0);
+
+    // ResizeObserver to handle dynamic content changes (e.g., image loads)
     const resizeObserver = new ResizeObserver(() => {
       if (isAutoScroll.value) {
         scrollToBottom();
       }
     });
 
+    // Function to scroll to the bottom of the chat
     function scrollToBottom() {
       if (chatContainer.value) {
         chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
       }
     }
 
+    // Enable auto-scroll and scroll to bottom
     function enableAutoScroll() {
       isAutoScroll.value = true;
       scrollToBottom();
     }
 
+    // Handle user scroll to determine auto-scroll status
     function onScroll() {
       if (chatContainer.value) {
         const { scrollTop, scrollHeight, clientHeight } = chatContainer.value;
-        const buffer = 50;
+        const buffer = 50; // Buffer in pixels
 
+        // Determine if the user is near the bottom
         isAutoScroll.value = scrollTop + clientHeight >= scrollHeight - buffer;
       }
     }
 
+    // Handle content changes (e.g., image loads)
     function handleContentChange() {
       if (isAutoScroll.value) {
         nextTick(scrollToBottom);
       }
     }
 
+    // Before the update, check if a message is about to be removed
+    onBeforeUpdate(() => {
+      if (previousMessages.value.length > displayedChatMessages.value.length) {
+        // A message is about to be removed from the top
+        if (chatContainer.value) {
+          const firstMessage = chatContainer.value.querySelector('.chat-message');
+          if (firstMessage) {
+            previousFirstMessageHeight.value = firstMessage.getBoundingClientRect().height;
+          }
+        }
+      }
+    });
+
+    // After the update, adjust scrollTop if a message was removed
+    onUpdated(() => {
+      if (previousMessages.value.length > displayedChatMessages.value.length) {
+        if (chatContainer.value) {
+          chatContainer.value.scrollTop -= previousFirstMessageHeight.value;
+        }
+      }
+      // Update previousMessages to current messages
+      previousMessages.value = displayedChatMessages.value.slice();
+    });
+
+    // Watch for new messages to auto-scroll if enabled
+    watch(displayedChatMessages, async () => {
+      if (isAutoScroll.value) {
+        await nextTick();
+        scrollToBottom();
+      }
+    });
+
+    // Initialize chat simulation and observe container
     onMounted(() => {
       startChatSimulation();
       scrollToBottom();
@@ -99,19 +151,14 @@ export default defineComponent({
       if (chatContainer.value) {
         resizeObserver.observe(chatContainer.value);
       }
+      previousMessages.value = displayedChatMessages.value.slice();
     });
 
+    // Cleanup on component unmount
     onUnmounted(() => {
       stopChatSimulation();
       if (chatContainer.value) {
         resizeObserver.unobserve(chatContainer.value);
-      }
-    });
-
-    watch(displayedChatMessages, async () => {
-      if (isAutoScroll.value) {
-        await nextTick();
-        scrollToBottom();
       }
     });
 
@@ -126,3 +173,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+/* No additional styles needed */
+</style>
