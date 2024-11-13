@@ -32,8 +32,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Stream from './components/Stream.vue';
-import Chat from './components/Chat.vue';
+import Stream from './components/StreamFeed.vue';
+import Chat from './components/StreamChat.vue';
 import DonationButtons from './components/DonationButtons.vue';
 
 export default defineComponent({

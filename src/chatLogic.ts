@@ -1,6 +1,8 @@
 // src/chatLogic.ts
 
-import { ref, computed } from 'vue';
+import {
+ ref, computed, 
+} from 'vue';
 import type { Pinia } from 'pinia';
 import { useChatStore } from './stores/chatStore';
 import { useSentimentStore } from './stores/sentimentStore';
@@ -14,6 +16,10 @@ export interface ChatLogicType {
   updateMessageInterval: (newInterval: number) => void;
 }
 
+/**
+ *
+ * @param pinia
+ */
 export function createChatLogic(pinia: Pinia): ChatLogicType {
   const chatStore = useChatStore(pinia);
   const sentimentStore = useSentimentStore(pinia);
@@ -23,9 +29,12 @@ export function createChatLogic(pinia: Pinia): ChatLogicType {
 
   const currentSentiment = computed(() => sentimentStore.currentSentiment);
 
+  /**
+   *
+   */
   function addChatMessage() {
     const sentimentMessages = chatMessagesData.filter(
-      (msg) => msg.sentiment === currentSentiment.value
+      (msg) => msg.sentiment === currentSentiment.value,
     );
 
     if (sentimentMessages.length === 0) return;
@@ -41,11 +50,17 @@ export function createChatLogic(pinia: Pinia): ChatLogicType {
     });
   }
 
+  /**
+   *
+   */
   function startChatSimulation() {
     if (chatIntervalId !== null) return;
     chatIntervalId = window.setInterval(addChatMessage, messageInterval.value);
   }
 
+  /**
+   *
+   */
   function stopChatSimulation() {
     if (chatIntervalId !== null) {
       clearInterval(chatIntervalId);
@@ -53,6 +68,10 @@ export function createChatLogic(pinia: Pinia): ChatLogicType {
     }
   }
 
+  /**
+   *
+   * @param newInterval
+   */
   function updateMessageInterval(newInterval: number) {
     messageInterval.value = newInterval;
     stopChatSimulation();

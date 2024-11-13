@@ -10,5 +10,5 @@ export const usernamesData = [
   "DankMemer",
   "SaltyDog",
   "MagicMike",
-  "EpicGamer"
+  "EpicGamer",
 ];

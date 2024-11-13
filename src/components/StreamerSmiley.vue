@@ -7,7 +7,7 @@
         height="100"
     >
       <!-- Face Background -->
-      <rect x="0" y="0" width="24" height="24" fill="#FFDD67" />
+      <rect x="0" y="0" width="24" height="24" fill="#FFDD67"/>
 
       <!-- Eyes -->
       <template v-if="emotion === Emotion.ECSTATIC">
@@ -17,8 +17,8 @@
       </template>
       <template v-else>
         <!-- Consistent Eyes for Other Emotions -->
-        <circle cx="8" cy="8" r="2" fill="#000" />
-        <circle cx="16" cy="8" r="2" fill="#000" />
+        <circle cx="8" cy="8" r="2" fill="#000"/>
+        <circle cx="16" cy="8" r="2" fill="#000"/>
       </template>
 
       <!-- Mouth -->
@@ -67,16 +67,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { Emotion } from '../types/sentimentTypes';
+import {
+  defineComponent,
+  PropType,
+} from 'vue';
+import { Emotion } from '@/types/sentimentTypes';
 
 export default defineComponent({
   name: 'StreamerSmiley',
-  computed: {
-    Emotion() {
-      return Emotion
-    }
-  },
   props: {
     emotion: {
       type: String as PropType<Emotion>,
@@ -86,9 +84,10 @@ export default defineComponent({
       },
     },
   },
+  setup() {
+    return {
+      Emotion,
+    };
+  },
 });
 </script>
-
-<style scoped>
-/* No additional styles needed */
-</style>

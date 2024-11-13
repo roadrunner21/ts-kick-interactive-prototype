@@ -5,12 +5,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import {
+ defineComponent, computed, 
+} from 'vue';
 import StreamerSmiley from './StreamerSmiley.vue';
-import { useSentimentStore } from '../stores/sentimentStore';
+import { useSentimentStore } from '@/stores/sentimentStore';
 
 export default defineComponent({
-  name: 'Stream',
+  name: 'StreamFeed',
   components: {
     StreamerSmiley,
   },
@@ -18,7 +20,9 @@ export default defineComponent({
     const sentimentStore = useSentimentStore();
     const smileyEmotion = computed(() => sentimentStore.currentSmileyEmotion);
 
-    return { smileyEmotion };
+    return {
+ smileyEmotion, 
+};
   },
 });
 </script>

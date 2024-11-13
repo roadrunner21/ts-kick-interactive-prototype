@@ -31,22 +31,25 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useDonationStore } from '../stores/donationStore';
+import { useDonationStore } from '@/stores/donationStore';
 
 export default defineComponent({
   name: 'DonationButtons',
   setup() {
     const donationStore = useDonationStore();
 
-    function donate(amount: number) {
+    /**
+     * Triggers a donation of the specified amount.
+     * @param {number} amount - The donation amount in dollars.
+     * @returns {void}
+     */
+    function donate(amount: number): void {
       donationStore.addDonation(amount);
     }
 
-    return { donate };
+    return {
+      donate,
+    };
   },
 });
 </script>
-
-<style scoped>
-/* No additional styles needed */
-</style>

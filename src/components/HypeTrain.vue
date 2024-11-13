@@ -1,4 +1,3 @@
-<!-- src/components/Hypetrain.vue -->
 <template>
   <div class="absolute top-0 left-0 right-0 bg-kick-bg bg-opacity-95 p-2.5 border-b border-kick-border z-20">
     <div class="relative">
@@ -28,58 +27,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, ref } from 'vue';
-import { useDonationStore } from '../stores/donationStore';
-import * as confetti from 'canvas-confetti'; // Import as namespace
+import {
+ defineComponent, computed, watch,
+} from 'vue';
+import { useDonationStore } from '@/stores/donationStore';
+import { useFormattedTime } from '@/composables/useFormattedTime';
+import { useConfetti } from '@/composables/useConfetti';
+import { useLevelUpAnimation } from '@/composables/useLevelUpAnimation';
+
+// Constants for magic numbers
+const GLOW_EFFECT_DURATION = 1000;
+const FIXED_DECIMAL_PLACES = 2;
 
 export default defineComponent({
-  name: 'Hypetrain',
+  name: 'HypeTrain',
   setup() {
     const donationStore = useDonationStore();
-    const progressPercentage = computed(() =>
-        donationStore.hypeTrainProgressPercentage.toFixed(2)
-    );
-    const formattedTime = computed(() => {
-      const minutes = Math.floor(donationStore.hypeTrainTimeRemaining / 60);
-      const seconds = donationStore.hypeTrainTimeRemaining % 60;
-      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    });
+    const { formattedTime } = useFormattedTime(donationStore.hypeTrainTimeRemaining);
+    const { confettiCanvas, launchConfetti } = useConfetti();
+    const { levelUpAnimation, triggerLevelUpAnimation } = useLevelUpAnimation();
 
-    const levelUpAnimation = ref(false);
-    const confettiCanvas = ref<HTMLCanvasElement | null>(null);
+    const progressPercentage = computed(() => donationStore.hypeTrainProgressPercentage.toFixed(FIXED_DECIMAL_PLACES));
 
     // Watch for level changes to trigger animations
     watch(
         () => donationStore.hypeTrainLevel,
         (newLevel, oldLevel) => {
           if (newLevel > oldLevel) {
-            triggerLevelUpAnimation();
+            triggerLevelUpAnimation(GLOW_EFFECT_DURATION);
             launchConfetti();
           }
-        }
+        },
     );
-
-    function triggerLevelUpAnimation() {
-      levelUpAnimation.value = true;
-      setTimeout(() => {
-        levelUpAnimation.value = false;
-      }, 1000); // Duration of the glow effect
-    }
-
-    function launchConfetti() {
-      if (confettiCanvas.value) {
-        const myConfetti = confetti.create(confettiCanvas.value, {
-          resize: true,
-          useWorker: true,
-        });
-        myConfetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#53FC18', '#42c514'], // Kick colors
-        });
-      }
-    }
 
     return {
       donationStore,

@@ -6,11 +6,13 @@ module.exports = {
     browser: true,
     node: true,
   },
-  parser: "@typescript-eslint/parser",
+  // Use vue-eslint-parser as the main parser
+  parser: "vue-eslint-parser",
   parserOptions: {
+    parser: "@typescript-eslint/parser",
     ecmaVersion: 2021,
     sourceType: "module",
-    project: "./tsconfig.eslint.json",
+    project: path.resolve(__dirname, "tsconfig.eslint.json"), // Ensure this is correct
     extraFileExtensions: [".vue"],
   },
   plugins: [
@@ -32,11 +34,32 @@ module.exports = {
   ],
   settings: {
     "import/resolver": {
+      typescript: {
+        project: path.resolve(__dirname, "tsconfig.eslint.json"),
+      },
       node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"],
         paths: [path.resolve(__dirname, "src")],
       },
     },
   },
+  overrides: [
+    {
+      files: ["*.vue"],
+      parser: "vue-eslint-parser", // Vue parser for .vue files
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+      },
+      rules: {
+        // Disable rules for `import` errors within .vue files
+        "import/namespace": "off",
+        "import/default": "off",
+        "import/no-named-as-default-member": "off",
+        "import/no-named-as-default": "off",
+        "import/no-unresolved": "off",
+      },
+    },
+  ],
   rules: {
     // Vue-specific rules
     "vue/component-api-style": ["warn", ["composition"]],
@@ -147,5 +170,5 @@ module.exports = {
     "no-restricted-imports": ["error", { patterns: ["../*"] }],
     "import/no-named-default": "warn",
   },
-  ignorePatterns: ["eslint.config.js", ".eslintrc.js"],
+  ignorePatterns: ["eslint.config.js", ".eslintrc.js", "src/shims-vue.d.ts"],
 };

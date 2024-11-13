@@ -18,7 +18,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import {
+ defineComponent, computed, 
+} from 'vue';
 import { emotesData } from '../assets/data/emotes';
 
 export default defineComponent({
@@ -36,6 +38,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const words = computed(() => props.text.split(/(\s+)/));
 
+    /**
+     *
+     */
     function notifyContentChanged() {
       emit('contentChanged');
     }

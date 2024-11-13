@@ -1,14 +1,7 @@
 {
-  "extends": "./tsconfig.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "eslint.config.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
+  "extends": "./tsconfig.app.json",
+  "include": ["src/**/*", "eslint.config.js"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "noEmit": true,
     "allowJs": true

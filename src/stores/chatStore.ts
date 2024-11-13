@@ -1,12 +1,14 @@
-// src/stores/chatStore.ts
-
 import { defineStore } from 'pinia';
 
-// Define and export the ChatMessage type for use in other files
 export interface ChatMessage {
   username: string;
   text: string;
 }
+
+// Maximum number of messages to store in the chat history
+const MAX_MESSAGES = 100;
+// Number of recent messages to display in the chat view
+const RECENT_MESSAGES_COUNT = 50;
 
 export const useChatStore = defineStore('chat', {
   state: () => ({
@@ -16,12 +18,17 @@ export const useChatStore = defineStore('chat', {
   actions: {
     addMessage(message: ChatMessage) {
       this.messages.push(message);
-      if (this.messages.length > 100) {
+      // Limit the message history length to avoid memory issues
+      if (this.messages.length > MAX_MESSAGES) {
         this.messages.shift();
       }
     },
     addSystemMessage(text: string) {
-      this.addMessage({ username: 'System', text });
+      // Adds a system-generated message with 'System' as the username
+      this.addMessage({
+        username: 'System',
+        text,
+      });
     },
     clearMessages() {
       this.messages = [];
@@ -29,6 +36,7 @@ export const useChatStore = defineStore('chat', {
   },
 
   getters: {
-    recentMessages: (state) => state.messages.slice(-50),
+    // Returns the last RECENT_MESSAGES_COUNT messages
+    recentMessages: (state) => state.messages.slice(-RECENT_MESSAGES_COUNT),
   },
 });
