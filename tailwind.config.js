@@ -9,7 +9,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Existing color palette
         'kick-bg': '#141517',
         'kick-text': '#FFFFFF',
         'kick-highlight': '#53FC18',

@@ -1,61 +1,67 @@
 // src/chatLogic.ts
 
 import { ref, computed } from 'vue';
-import { chatMessagesData } from './assets/data/chatMessages';
-import { usernamesData } from './assets/data/usernames';
+import type { Pinia } from 'pinia';
 import { useChatStore } from './stores/chatStore';
 import { useSentimentStore } from './stores/sentimentStore';
-import type { Pinia } from 'pinia';
+import { chatMessagesData } from './assets/data/chatMessages';
+import { usernamesData } from './assets/data/usernames';
 
-const messageInterval = ref(2000); // Default interval in milliseconds
-
-let chatStore: ReturnType<typeof useChatStore>;
-let sentimentStore: ReturnType<typeof useSentimentStore>;
-
-// Initialize stores with provided pinia instance
-export function initializeChatLogic(pinia: Pinia) {
-  chatStore = useChatStore(pinia);
-  sentimentStore = useSentimentStore(pinia);
+// Define ChatLogicType
+export interface ChatLogicType {
+  startChatSimulation: () => void;
+  stopChatSimulation: () => void;
+  updateMessageInterval: (newInterval: number) => void;
 }
 
-const currentSentiment = computed(() => sentimentStore.currentSentiment);
+export function createChatLogic(pinia: Pinia): ChatLogicType {
+  const chatStore = useChatStore(pinia);
+  const sentimentStore = useSentimentStore(pinia);
 
-function addChatMessage() {
-  const sentimentMessages = chatMessagesData.filter(
-    (msg) => msg.sentiment === currentSentiment.value
-  );
+  const messageInterval = ref(2000);
+  let chatIntervalId: number | null = null;
 
-  if (sentimentMessages.length === 0) return;
+  const currentSentiment = computed(() => sentimentStore.currentSentiment);
 
-  const randomMessage =
-    sentimentMessages[Math.floor(Math.random() * sentimentMessages.length)];
-  const randomUsername =
-    usernamesData[Math.floor(Math.random() * usernamesData.length)];
+  function addChatMessage() {
+    const sentimentMessages = chatMessagesData.filter(
+      (msg) => msg.sentiment === currentSentiment.value
+    );
 
-  chatStore.addMessage({
-    username: randomUsername,
-    text: randomMessage.text,
-  });
-}
+    if (sentimentMessages.length === 0) return;
 
-let chatIntervalId: number;
+    const randomMessage =
+      sentimentMessages[Math.floor(Math.random() * sentimentMessages.length)];
+    const randomUsername =
+      usernamesData[Math.floor(Math.random() * usernamesData.length)];
 
-// Start chat simulation
-export function startChatSimulation() {
-  if (!chatStore || !sentimentStore) {
-    throw new Error('Chat logic not initialized. Call initializeChatLogic(pinia) first.');
+    chatStore.addMessage({
+      username: randomUsername,
+      text: randomMessage.text,
+    });
   }
-  chatIntervalId = window.setInterval(addChatMessage, messageInterval.value);
-}
 
-// Stop chat simulation
-export function stopChatSimulation() {
-  clearInterval(chatIntervalId);
-}
+  function startChatSimulation() {
+    if (chatIntervalId !== null) return;
+    chatIntervalId = window.setInterval(addChatMessage, messageInterval.value);
+  }
 
-// Update message interval
-export function updateMessageInterval(newInterval: number) {
-  messageInterval.value = newInterval;
-  stopChatSimulation();
-  startChatSimulation();
+  function stopChatSimulation() {
+    if (chatIntervalId !== null) {
+      clearInterval(chatIntervalId);
+      chatIntervalId = null;
+    }
+  }
+
+  function updateMessageInterval(newInterval: number) {
+    messageInterval.value = newInterval;
+    stopChatSimulation();
+    startChatSimulation();
+  }
+
+  return {
+    startChatSimulation,
+    stopChatSimulation,
+    updateMessageInterval,
+  };
 }
