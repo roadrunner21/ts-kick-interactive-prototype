@@ -9,27 +9,18 @@
 @layer components {
     /* VHS Effect - Generic Effect */
     .vhs-effect {
-        position: relative;
-        overflow: hidden;
+        @apply relative overflow-hidden;
     }
 
     .vhs-effect::before,
     .vhs-effect::after {
         content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 2;
+        @apply absolute inset-0 pointer-events-none z-10;
     }
 
     /* Overlay for Color Distortion and Noise */
     .vhs-effect::before {
-        background: rgba(255, 255, 255, 0.05);
-        mix-blend-mode: overlay;
-        animation: vhs-colorShift 30s infinite linear; /* Slowed down */
+        @apply bg-white bg-opacity-5 mix-blend-overlay animate-vhsColorShift;
     }
 
     /* Scan Lines */
@@ -41,31 +32,8 @@
                 transparent 1px,
                 transparent 3px
         ),
-        url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg=='); /* Transparent noise */
-        opacity: 0.2;
-        background-blend-mode: overlay;
-        animation: vhs-scanLines 15s infinite linear; /* Slowed down */
-    }
-
-    /* Keyframes for Animations */
-    @keyframes vhs-colorShift {
-        0% {
-            filter: hue-rotate(0deg);
-        }
-        50% {
-            filter: hue-rotate(360deg);
-        }
-        100% {
-            filter: hue-rotate(0deg);
-        }
-    }
-
-    @keyframes vhs-scanLines {
-        from {
-            background-position: 0 0, 0 0;
-        }
-        to {
-            background-position: 0 3px, 0 3px;
-        }
+        var(--tw-bg-image);
+        @apply opacity-20 bg-blend-overlay animate-vhsScanLines;
+        --tw-bg-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==');
     }
 }

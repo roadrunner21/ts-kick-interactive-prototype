@@ -1,3 +1,5 @@
+// tailwind.config.js
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -20,12 +22,31 @@ module.exports = {
       },
       animation: {
         'gradientShift': 'gradientShift 5s linear infinite',
+        'glowAnimation': 'glowAnimation 1s ease-out',
+        'vhsColorShift': 'vhsColorShift 30s linear infinite',
+        'vhsScanLines': 'vhsScanLines 15s linear infinite',
       },
       keyframes: {
         gradientShift: {
           '0%': { 'background-position': '0% 50%' },
           '100%': { 'background-position': '200% 50%' },
         },
+        glowAnimation: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        vhsColorShift: {
+          '0%': { filter: 'hue-rotate(0deg)' },
+          '50%': { filter: 'hue-rotate(360deg)' },
+          '100%': { filter: 'hue-rotate(0deg)' },
+        },
+        vhsScanLines: {
+          'from': { 'background-position': '0 0, 0 0' },
+          'to': { 'background-position': '0 3px, 0 3px' },
+        },
+      },
+      backgroundImage: {
+        'vhs-noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==')",
       },
     },
   },

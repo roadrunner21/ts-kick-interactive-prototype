@@ -1,7 +1,7 @@
 <!-- src/components/Hypetrain.vue -->
 <template>
-  <div class="hype-train-container">
-    <div class="hype-train-content">
+  <div class="absolute top-0 left-0 right-0 bg-kick-bg bg-opacity-95 p-2.5 border-b border-kick-border z-20">
+    <div class="relative">
       <div class="flex items-center justify-between mb-1">
         <p class="text-kick-text font-bold">
           🚂 Hype Train Level {{ donationStore.hypeTrainLevel }}
@@ -12,18 +12,18 @@
       </div>
       <div class="w-full bg-kick-border rounded-full h-4 relative overflow-hidden">
         <div
-            class="hype-train-progress h-4 rounded-full transition-width duration-500"
+            class="h-4 rounded-full transition-[width] duration-500 ease-in-out bg-gradient-to-r from-[#53FC18] via-[#42c514] to-[#389d10]"
             :style="{ width: progressPercentage + '%' }"
         ></div>
         <!-- Level-Up Glow Effect -->
         <div
             v-if="levelUpAnimation"
-            class="absolute top-0 left-0 w-full h-full rounded-full level-up-glow"
+            class="absolute inset-0 rounded-full bg-gradient-radial from-[rgba(83,252,24,0.7)] to-transparent animate-glowAnimation"
         ></div>
       </div>
     </div>
     <!-- Confetti Canvas -->
-    <canvas ref="confettiCanvas" class="confetti-canvas"></canvas>
+    <canvas ref="confettiCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
   </div>
 </template>
 
@@ -91,53 +91,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.hype-train-container {
-  position: absolute; /* Ensure it floats above the chat */
-  top: 0; /* Align with chat header */
-  left: 0;
-  right: 0;
-  background-color: rgba(20, 21, 23, 0.95); /* kick-bg with opacity */
-  padding: 10px;
-  border-bottom: 1px solid #E5E7EB; /* kick-border */
-  z-index: 20; /* Higher than chat to float above */
-}
-
-.hype-train-content {
-  position: relative;
-}
-
-.hype-train-progress {
-  background: linear-gradient(
-      to right,
-      #53FC18, /* Kick green */
-      #42c514 50%, /* Darker Kick green in the middle */
-      #389d10 /* Slightly darker green toward the end */
-  );
-  transition: width 0.5s ease-in-out; /* Smooth width transition */
-}
-
-.level-up-glow {
-  background: radial-gradient(circle, rgba(83, 252, 24, 0.7), transparent);
-  animation: glowAnimation 1s ease-out;
-}
-
-@keyframes glowAnimation {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.confetti-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-</style>
