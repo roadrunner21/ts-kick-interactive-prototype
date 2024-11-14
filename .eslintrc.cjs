@@ -170,5 +170,5 @@ module.exports = {
     "no-restricted-imports": ["error", { patterns: ["../*"] }],
     "import/no-named-default": "warn",
   },
-  ignorePatterns: ["eslint.config.js", ".eslintrc.js", "src/shims-vue.d.ts"],
+  ignorePatterns: ["eslint.config.js", ".eslintrc.js", "src/shims-vue.d.ts", "tailwind.config.js"],
 };
