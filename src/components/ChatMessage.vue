@@ -2,7 +2,7 @@
   <div class="flex items-center">
     <span class="font-semibold mr-1">{{ username }}:</span>
     <span>
-      <template v-for="(word, index) in words" :key="index">
+      <span v-for="(word, index) in words" :key="index">
         <img
             v-if="emotesData[word.toLowerCase()]"
             :src="emotesData[word.toLowerCase()]"
@@ -12,7 +12,7 @@
         />
         <span v-else>{{ word }}</span>
         <span v-if="index < words.length - 1"> </span>
-      </template>
+      </span>
     </span>
   </div>
 </template>
@@ -21,7 +21,7 @@
 import {
  defineComponent, computed, 
 } from 'vue';
-import { emotesData } from '../assets/data/emotes';
+import { emotesData } from '@/assets/data/emotes'; // Updated import using alias
 
 export default defineComponent({
   name: 'ChatMessage',
@@ -39,9 +39,9 @@ export default defineComponent({
     const words = computed(() => props.text.split(/(\s+)/));
 
     /**
-     *
+     * Emits an event to notify that the content has changed.
      */
-    function notifyContentChanged() {
+    function notifyContentChanged(): void {
       emit('contentChanged');
     }
 

@@ -1,15 +1,16 @@
 <template>
   <div class="aspect-w-16 aspect-h-9 rounded-lg flex flex-col items-center justify-center relative vhs-effect">
-    <StreamerSmiley :emotion="smileyEmotion" />
+    <StreamerSmiley :emotion="smileyEmotion"/>
   </div>
 </template>
 
 <script lang="ts">
 import {
- defineComponent, computed, 
+  defineComponent,
+  computed,
 } from 'vue';
-import StreamerSmiley from './StreamerSmiley.vue';
 import { useSentimentStore } from '@/stores/sentimentStore';
+import StreamerSmiley from './StreamerSmiley.vue';
 
 export default defineComponent({
   name: 'StreamFeed',
@@ -21,8 +22,8 @@ export default defineComponent({
     const smileyEmotion = computed(() => sentimentStore.currentSmileyEmotion);
 
     return {
- smileyEmotion, 
-};
+      smileyEmotion,
+    };
   },
 });
 </script>

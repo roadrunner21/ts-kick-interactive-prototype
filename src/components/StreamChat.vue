@@ -58,10 +58,10 @@ import {
 } from 'vue';
 import { useChatStore } from '@/stores/chatStore';
 import { useDonationStore } from '@/stores/donationStore';
-import ChatMessage from './ChatMessage.vue';
-import HypeTrain from './HypeTrain.vue';
 import type { ChatLogicType } from '@/chatLogic';
 import { useChatScroll } from "@/composables/useChatScroll";
+import ChatMessage from './ChatMessage.vue';
+import HypeTrain from './HypeTrain.vue';
 
 export default defineComponent({
   name: 'StreamChat',
