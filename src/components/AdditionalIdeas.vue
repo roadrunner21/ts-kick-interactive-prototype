@@ -1,20 +1,45 @@
 <!-- src/components/AdditionalIdeas.vue -->
 
 <template>
-  <section class="py-20 px-4 bg-kick-bg">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Additional Ideas</h2>
-    <p class="max-w-2xl mx-auto text-center">
-      I have several other concepts in mind, such as integrating AI for real-time translations and enhancing user accessibility. I'd be excited to discuss these in more detail.
-    </p>
+  <section class="py-20 px-4 bg-kick-bg text-kick-text">
+    <h2 class="section-heading">Additional Ideas</h2>
+    <div class="max-w-3xl mx-auto space-y-8">
+      <!-- Ideas -->
+      <div v-for="(idea, index) in ideas" :key="index" class="text-center animate-fadeIn">
+        <h3 class="text-2xl font-semibold mb-2">{{ idea.title }}</h3>
+        <p>{{ idea.description }}</p>
+      </div>
+    </div>
   </section>
 </template>
 
 <script lang="ts">
-export default {
+import {
+ defineComponent, ref, 
+} from 'vue';
+
+export default defineComponent({
   name: 'AdditionalIdeas',
-};
+  setup() {
+    // Define ideas using ref to be reactive
+    const ideas = ref([
+      {
+        title: 'AI Integration for Translations',
+        description: 'Implementing AI-powered real-time translations to enhance accessibility for global audiences.',
+      },
+      {
+        title: 'Advanced Analytics Dashboard',
+        description: 'Providing streamers with deeper insights into viewer engagement and stream performance.',
+      },
+    ]);
+
+    return {
+      ideas,
+    };
+  },
+});
 </script>
 
 <style scoped>
-/* Scoped styles for AdditionalIdeas */
+/* No additional styles needed */
 </style>

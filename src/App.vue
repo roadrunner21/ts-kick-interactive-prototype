@@ -8,6 +8,9 @@
     <!-- About Me Section -->
     <AboutMe />
 
+    <!-- Inspiration Section -->
+    <InspirationSection />
+
     <!-- Identified Challenges Section -->
     <IdentifiedChallenges />
 
@@ -27,17 +30,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HeroSection from './components/HeroSection.vue';
-import AboutMe from './components/AboutMe.vue';
-import IdentifiedChallenges from './components/IdentifiedChallenges.vue';
-import ProposedSolutions from './components/ProposedSolutions.vue';
-import PrototypeDemonstration from './components/PrototypeDemonstration.vue';
-import AdditionalIdeas from './components/AdditionalIdeas.vue';
-import CallToAction from './components/CallToAction.vue';
+import InspirationSection from "@/components/InspirationSection.vue";
+import HeroSection from '@/components/HeroSection.vue';
+import AboutMe from '@/components/AboutMe.vue';
+import IdentifiedChallenges from '@/components/IdentifiedChallenges.vue';
+import ProposedSolutions from '@/components/ProposedSolutions.vue';
+import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
+import AdditionalIdeas from '@/components/AdditionalIdeas.vue';
+import CallToAction from '@/components/CallToAction.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
+    InspirationSection,
     HeroSection,
     AboutMe,
     IdentifiedChallenges,

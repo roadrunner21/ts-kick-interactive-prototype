@@ -1,10 +1,12 @@
 <!-- src/components/PrototypeDemonstration.vue -->
 
 <template>
-  <section class="py-20 px-4 bg-kick-bg">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Prototype Demonstration</h2>
-    <!-- Main Prototype Component (with Donation Buttons, Stream, and Chat) -->
-    <div class="max-w-4xl mx-auto">
+  <section class="py-20 px-4 bg-kick-bg text-kick-text">
+    <h2 class="section-heading">Prototype Demonstration</h2>
+    <p class="max-w-2xl mx-auto mb-6 text-center">
+      Explore the interactive prototype below to see how these solutions come to life.
+    </p>
+    <div class="max-w-5xl mx-auto">
       <PrototypeComponent />
     </div>
   </section>
@@ -23,5 +25,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Scoped styles for PrototypeDemonstration */
+/* No additional styles needed */
 </style>

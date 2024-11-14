@@ -9,21 +9,35 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Kick branding colors
         'kick-bg': '#141517',
         'kick-text': '#FFFFFF',
         'kick-highlight': '#53FC18',
+        'kick-highlight-hover': '#42c514',
         'kick-label': '#929EA6',
         'kick-border': '#E5E7EB',
-        'kick-highlight-hover': '#42c514',
+        // Additional colors
+        'kick-accent': '#1DB954', // For text highlights
+        'kick-gradient-start': '#141517',
+        'kick-gradient-end': '#53FC18',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      backgroundImage: theme => ({
+        'hero-pattern': "url('https://placehold.co/1920x1080.png')",
+        'inspiration-bg': "url('https://placehold.co/1920x1080.png')",
+        'vhs-noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==')",
+        // Additional background images
+      }),
       animation: {
         'gradientShift': 'gradientShift 5s linear infinite',
         'glowAnimation': 'glowAnimation 1s ease-out',
         'vhsColorShift': 'vhsColorShift 30s linear infinite',
         'vhsScanLines': 'vhsScanLines 15s linear infinite',
+        'fadeIn': 'fadeIn 1s ease-out',
+        'pulseSlow': 'pulse 2s infinite',
+        'bounceSlow': 'bounce 2s infinite',
       },
       keyframes: {
         gradientShift: {
@@ -43,9 +57,11 @@ module.exports = {
           'from': { 'background-position': '0 0, 0 0' },
           'to': { 'background-position': '0 3px, 0 3px' },
         },
-      },
-      backgroundImage: {
-        'vhs-noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==')",
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        // Additional keyframes if needed
       },
     },
   },
