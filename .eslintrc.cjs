@@ -12,7 +12,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     ecmaVersion: 2021,
     sourceType: "module",
-    project: path.resolve(__dirname, "tsconfig.eslint.json"), // Ensure this is correct
+    project: path.resolve(__dirname, "tsconfig.json"), // Ensure this is correct
     extraFileExtensions: [".vue"],
   },
   plugins: [
@@ -35,7 +35,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       typescript: {
-        project: path.resolve(__dirname, "tsconfig.eslint.json"),
+        project: path.resolve(__dirname, "tsconfig.json"),
       },
       node: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"],
