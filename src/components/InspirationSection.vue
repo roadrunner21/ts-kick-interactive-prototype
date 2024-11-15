@@ -1,7 +1,7 @@
 <!-- src/components/Inspiration.vue -->
 
 <template>
-  <section class="relative py-40 bg-inspiration-bg bg-cover bg-fixed">
+  <section class="relative py-40 bg-inspiration-bg bg-contain bg-fixed">
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-60"></div>
     <!-- Content -->
