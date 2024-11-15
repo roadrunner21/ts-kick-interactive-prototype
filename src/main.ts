@@ -8,6 +8,14 @@ import GlitchDirective from './directives/glitch';
 import { showConsoleEasterEgg } from './consoleEasterEgg';
 import { createChatLogic } from './chatLogic';
 
+// Import GSAP and its plugins
+import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
+
+// Register GSAP plugins globally
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
 if (import.meta.env.PROD) {
   showConsoleEasterEgg();
 }

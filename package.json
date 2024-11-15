@@ -37,6 +37,7 @@
   "dependencies": {
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
+    "gsap": "^3.12.5",
     "pinia": "^2.2.6",
     "vue": "^3.5.12"
   },
