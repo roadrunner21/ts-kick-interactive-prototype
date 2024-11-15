@@ -1,20 +1,21 @@
 <!-- src/components/HeroSection.vue -->
 
 <template>
-  <section class="relative flex flex-col items-center justify-center text-center py-40 bg-hero-pattern bg-cover bg-center">
-    <!-- Overlay for readability -->
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-
+  <section class="relative flex flex-col items-center justify-center text-center py-40 bg-black vhs-effect-strong">
     <!-- Content -->
     <div class="relative z-10 animate-fadeIn">
-      <h1 class="text-5xl md:text-6xl font-bold mb-4 text-white">
-        Elevating Kick's Community Engagement and Event Experience
+      <!-- Title -->
+      <h1 class="text-5xl md:text-6xl font-kickPixel text-kick-highlight mb-4 glitch-text" data-text="Elevating Kick">
+        Elevating Kick
       </h1>
-      <p class="text-2xl md:text-3xl mb-6 text-white">
-        Innovative Solutions to Enhance Streamer and Viewer Interactions
+
+      <!-- Description -->
+      <p class="text-lg md:text-xl text-white max-w-3xl mx-auto">
+        Leveraging innovation to enhance Kick's community features, boost viewer engagement, and empower creators with cutting-edge tools.
       </p>
+      <!-- Call-to-Action Button -->
       <button @click="scrollToNextSection" class="btn-primary mt-6">
-        Learn More
+        Explore My Vision
       </button>
     </div>
 
@@ -36,7 +37,7 @@ export default defineComponent({
     const scrollToNextSection = (): void => {
       const nextSection = document.getElementById('about-me');
       nextSection?.scrollIntoView({
- behavior: 'smooth', 
+ behavior: 'smooth',
 });
     };
 

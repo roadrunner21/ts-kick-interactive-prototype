@@ -23,9 +23,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        kickPixel: ['KickPixel', 'sans-serif'],
       },
       backgroundImage: theme => ({
-        'hero-pattern': "url('https://placehold.co/1920x1080.png')",
         'inspiration-bg': "url('https://placehold.co/1920x1080.png')",
         'vhs-noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==')",
         // Additional background images

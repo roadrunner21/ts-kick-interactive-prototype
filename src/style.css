@@ -7,34 +7,80 @@
 @tailwind utilities;
 
 @layer components {
-    /* VHS Effect - Generic Effect */
-    .vhs-effect {
+    /* VHS Effect - Stronger and More Glitchy */
+    .vhs-effect-strong {
         @apply relative overflow-hidden;
     }
 
-    .vhs-effect::before,
-    .vhs-effect::after {
+    .vhs-effect-strong::before,
+    .vhs-effect-strong::after {
         content: '';
         @apply absolute inset-0 pointer-events-none z-10;
     }
 
-    /* Overlay for Color Distortion and Noise */
-    .vhs-effect::before {
-        @apply bg-white bg-opacity-5 mix-blend-overlay animate-vhsColorShift;
+    /* Glitch Overlay */
+    .vhs-effect-strong::before {
+        background: linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.1),
+                rgba(0, 255, 0, 0.1),
+                rgba(0, 0, 255, 0.1)
+        );
+        mix-blend-mode: screen;
+        @apply animate-glitchAnimation;
     }
 
     /* Scan Lines */
-    .vhs-effect::after {
+    .vhs-effect-strong::after {
         background: repeating-linear-gradient(
-                0deg,
-                rgba(50, 50, 50, 0.8) 0px,
-                rgba(50, 50, 50, 0.8) 1px,
-                transparent 1px,
-                transparent 3px
-        ),
-        var(--tw-bg-image);
-        @apply opacity-20 bg-blend-overlay animate-vhsScanLines;
-        --tw-bg-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==');
+                180deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 3px
+        );
+        @apply animate-scanlines;
+    }
+
+    /* Glitch Animation Keyframes */
+    @keyframes glitchAnimation {
+        0% {
+            transform: translate(0, 0);
+        }
+        20% {
+            transform: translate(-2px, 2px);
+        }
+        40% {
+            transform: translate(2px, -2px);
+        }
+        60% {
+            transform: translate(-2px, 2px);
+        }
+        80% {
+            transform: translate(2px, -2px);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+
+    /* Scanlines Animation */
+    @keyframes scanlines {
+        from {
+            background-position: 0 0;
+        }
+        to {
+            background-position: 0 3px;
+        }
+    }
+
+    /* Apply Animations */
+    .animate-glitchAnimation {
+        animation: glitchAnimation 1s infinite;
+    }
+
+    .animate-scanlines {
+        animation: scanlines 0.5s infinite linear;
     }
 }
 
@@ -50,4 +96,171 @@
 
 .section-heading {
     @apply text-3xl md:text-4xl font-bold mb-8 text-center;
+}
+
+/* Glitch Effect */
+.glitch-text {
+    position: relative;
+    color: #53FC18; /* Kick Highlight Color */
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* Before Pseudo-element - Red Shift */
+.glitch-text::before {
+    left: 0;
+    text-shadow: -1px -2px red;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-anim-before 3s infinite linear alternate-reverse;
+}
+
+/* After Pseudo-element - Blue Shift */
+.glitch-text::after {
+    left: -2px;
+    text-shadow: 2px 0 blue;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-anim-after 2s infinite linear alternate-reverse;
+}
+
+/* Keyframes for Before */
+@keyframes glitch-anim-before {
+    0% {
+        clip: rect(0, 900px, 0, 0);
+        transform: translate(0, 0);
+    }
+    10% {
+        clip: rect(10px, 900px, 50px, 0);
+        transform: translate(-2px, -2px);
+    }
+    20% {
+        clip: rect(85px, 900px, 140px, 0);
+        transform: translate(-2px, 0px);
+    }
+    30% {
+        clip: rect(20px, 900px, 100px, 0);
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        clip: rect(30px, 900px, 80px, 0);
+        transform: translate(2px, -2px);
+    }
+    50% {
+        clip: rect(50px, 900px, 90px, 0);
+        transform: translate(2px, 0px);
+    }
+    60% {
+        clip: rect(40px, 900px, 120px, 0);
+        transform: translate(0px, 2px);
+    }
+    70% {
+        clip: rect(60px, 900px, 130px, 0);
+        transform: translate(-2px, -2px);
+    }
+    80% {
+        clip: rect(20px, 900px, 70px, 0);
+        transform: translate(2px, 2px);
+    }
+    90% {
+        clip: rect(10px, 900px, 60px, 0);
+        transform: translate(-2px, 0px);
+    }
+    100% {
+        clip: rect(0, 900px, 0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+/* Keyframes for After */
+@keyframes glitch-anim-after {
+    0% {
+        clip: rect(0, 900px, 0, 0);
+        transform: translate(0, 0);
+    }
+    10% {
+        clip: rect(60px, 900px, 100px, 0);
+        transform: translate(2px, 2px);
+    }
+    20% {
+        clip: rect(30px, 900px, 90px, 0);
+        transform: translate(-2px, -2px);
+    }
+    30% {
+        clip: rect(10px, 900px, 50px, 0);
+        transform: translate(2px, 0px);
+    }
+    40% {
+        clip: rect(80px, 900px, 120px, 0);
+        transform: translate(-2px, 2px);
+    }
+    50% {
+        clip: rect(50px, 900px, 110px, 0);
+        transform: translate(2px, -2px);
+    }
+    60% {
+        clip: rect(40px, 900px, 70px, 0);
+        transform: translate(0px, -2px);
+    }
+    70% {
+        clip: rect(20px, 900px, 60px, 0);
+        transform: translate(-2px, 2px);
+    }
+    80% {
+        clip: rect(70px, 900px, 130px, 0);
+        transform: translate(2px, 2px);
+    }
+    90% {
+        clip: rect(10px, 900px, 40px, 0);
+        transform: translate(-2px, 0px);
+    }
+    100% {
+        clip: rect(0, 900px, 0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+/* Optional: Slight Jump Rendering Effect */
+@keyframes jump-render {
+    0% {
+        clip: rect(0, 900px, 10px, 0);
+    }
+    25% {
+        clip: rect(10px, 900px, 30px, 0);
+    }
+    50% {
+        clip: rect(30px, 900px, 50px, 0);
+    }
+    75% {
+        clip: rect(50px, 900px, 70px, 0);
+    }
+    100% {
+        clip: rect(70px, 900px, 90px, 0);
+    }
+}
+
+/* Apply Jump Render Animation (Optional) */
+.glitch-text::before {
+    animation: glitch-anim-before 2s infinite linear alternate-reverse, jump-render .5s infinite ease-in-out;
+}
+
+.glitch-text::after {
+    animation: glitch-anim-after 2s infinite linear alternate-reverse, jump-render .5s infinite ease-in-out;
+}
+
+
+
+@font-face {
+    font-family: 'KickPixel';
+    src: url('@/assets/fonts/kick-font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

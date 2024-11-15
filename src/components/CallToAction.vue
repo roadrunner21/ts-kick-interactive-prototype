@@ -6,7 +6,7 @@
     <p class="mb-6 max-w-2xl mx-auto">
       I'm excited to discuss these ideas in detail. Feel free to reach out!
     </p>
-    <a href="mailto:your.email@example.com" class="btn-secondary">
+    <a href="mailto:marco@heftiweb.ch" class="btn-secondary">
       Contact Me
     </a>
   </section>
