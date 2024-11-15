@@ -1,7 +1,5 @@
 <template>
-  <section
-      id="hero-section"
-      class="relative flex flex-col items-center justify-center text-center h-screen bg-black vhs-effect-strong"
+  <section class="relative flex flex-col items-center justify-center text-center h-screen bg-black vhs-effect-strong"
   >
     <!-- Content -->
     <div class="relative z-10 animate-fadeIn">

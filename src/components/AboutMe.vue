@@ -1,7 +1,7 @@
 <!-- src/components/AboutMe.vue -->
 
 <template>
-  <section id="about-me" class="py-20 px-4 bg-kick-bg text-kick-text">
+  <section class="py-20 px-4 bg-kick-bg text-kick-text">
     <div class="container mx-auto flex flex-col md:flex-row items-center">
       <!-- Image -->
       <div class="md:w-1/3 mb-8 md:mb-0 md:mr-8 flex justify-center animate-fadeIn">

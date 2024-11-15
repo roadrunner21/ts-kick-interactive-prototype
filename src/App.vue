@@ -3,8 +3,8 @@
     <!-- Hero Section -->
     <HeroSection @scroll-down="scrollToAboutMe" />
 
-    <!-- About Me Section -->
-    <AboutMe />
+    <!-- About Me Section with ref -->
+    <AboutMe ref="aboutMeRef" />
 
     <!-- Other Sections -->
     <InspirationSection />
@@ -18,7 +18,12 @@
 
 <script lang="ts">
 import {
- defineComponent, onMounted, onUnmounted, nextTick,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  nextTick,
+  ref,
+  Ref,
 } from 'vue';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -44,44 +49,50 @@ export default defineComponent({
     CallToAction,
   },
   setup() {
+    const aboutMeRef: Ref<InstanceType<typeof AboutMe> | null> = ref(null);
     let isAnimating = false; // Prevent multiple triggers
 
     // Smooth scroll to the AboutMe section
     const scrollToAboutMe = () => {
-      if (isAnimating) return;
+      if (isAnimating || !aboutMeRef.value) return;
       isAnimating = true;
 
-      const aboutMeElement = document.getElementById('about-me');
-      if (aboutMeElement) {
-        gsap.to(window, {
-          duration: 1,
-          scrollTo: {
- y: aboutMeElement, offsetY: 0,
-},
-          ease: 'power2.inOut',
-          onComplete: () => {
-            isAnimating = false; // Reset flag after animation
-          },
-        });
-      } else {
-        console.error('AboutMe section not found!');
-        isAnimating = false; // Reset flag even if element not found
-      }
+      const element = aboutMeRef.value.$el; // Access the root DOM element of the AboutMe component
+
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: {
+          y: element,
+          offsetY: 0,
+        },
+        ease: 'power2.inOut',
+        onComplete: () => {
+          isAnimating = false; // Reset flag after animation
+        },
+      });
     };
 
     onMounted(async () => {
       await nextTick(); // Ensure DOM is updated
 
-      // Trigger smooth scroll when AboutMe enters the viewport
-      ScrollTrigger.create({
-        trigger: '#about-me',
-        start: 'top bottom', // Trigger when AboutMe's top reaches the bottom of the viewport
-        onEnter: () => {
-          console.log('AboutMe section has entered the viewport. Triggering smooth scroll.');
-          scrollToAboutMe();
-        },
-        markers: import.meta.env.DEV, // Enable markers in development
-      });
+      if (aboutMeRef.value) {
+        const element = aboutMeRef.value.$el; // Access the root DOM element of the AboutMe component
+
+        // Trigger smooth scroll when AboutMe enters the viewport
+        ScrollTrigger.create({
+          trigger: element,
+          start: 'top bottom', // Trigger when AboutMe's top reaches the bottom of the viewport
+          onEnter: () => {
+            console.log(
+                'AboutMe section has entered the viewport. Triggering smooth scroll.',
+            );
+            scrollToAboutMe();
+          },
+          markers: import.meta.env.DEV, // Enable markers in development
+        });
+      } else {
+        console.error('aboutMeRef is not assigned!');
+      }
     });
 
     onUnmounted(() => {
@@ -91,6 +102,7 @@ export default defineComponent({
 
     return {
       scrollToAboutMe,
+      aboutMeRef,
     };
   },
 });
