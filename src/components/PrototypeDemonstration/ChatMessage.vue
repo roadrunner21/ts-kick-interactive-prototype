@@ -21,7 +21,7 @@
 import {
  defineComponent, computed, 
 } from 'vue';
-import { emotesData } from '@/assets/data/emotes'; // Updated import using alias
+import { emotesData } from '@/data/emotes'; // Updated import using alias
 
 export default defineComponent({
   name: 'ChatMessage',

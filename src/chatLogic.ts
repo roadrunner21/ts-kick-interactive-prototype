@@ -4,10 +4,10 @@ import {
  ref, computed, 
 } from 'vue';
 import type { Pinia } from 'pinia';
+import { chatMessagesData } from '@/data/chatMessages';
+import { usernamesData } from '@/data/usernames';
 import { useChatStore } from './stores/chatStore';
 import { useSentimentStore } from './stores/sentimentStore';
-import { chatMessagesData } from './assets/data/chatMessages';
-import { usernamesData } from './assets/data/usernames';
 
 // Define ChatLogicType
 export interface ChatLogicType {
