@@ -1,7 +1,7 @@
 <!-- src/components/ProposedSolutions.vue -->
 
 <template>
-  <section class="py-20 px-4 bg-kick-bg text-kick-text">
+  <section class="py-20 px-4 bg-black text-kick-text">
     <h2 class="section-heading">Proposed Solutions</h2>
     <div class="max-w-4xl mx-auto space-y-12">
       <!-- Solutions -->

@@ -1,7 +1,7 @@
 <!-- src/components/AdditionalIdeas.vue -->
 
 <template>
-  <section class="py-20 px-4 bg-kick-bg text-kick-text">
+  <section class="py-20 px-4 bg-black text-kick-text">
     <h2 class="section-heading">Additional Ideas</h2>
     <div class="max-w-3xl mx-auto space-y-8">
       <!-- Ideas -->

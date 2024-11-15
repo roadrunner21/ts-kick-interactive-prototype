@@ -190,3 +190,47 @@
     font-weight: normal;
     font-style: normal;
 }
+
+.kick-frame {
+    position: relative;
+    padding: 20px;
+    /* Define four linear gradients for the four corners */
+    background-image:
+        /* Top-Left Corner */
+            linear-gradient(to right, #53FC18 6px, transparent 0),
+            linear-gradient(to bottom, #53FC18 6px, transparent 0),
+                /* Top-Right Corner */
+            linear-gradient(to left, #53FC18 6px, transparent 0),
+            linear-gradient(to bottom, #53FC18 6px, transparent 0),
+                /* Bottom-Left Corner */
+            linear-gradient(to right, #53FC18 6px, transparent 0),
+            linear-gradient(to top, #53FC18 6px, transparent 0),
+                /* Bottom-Right Corner */
+            linear-gradient(to left, #53FC18 6px, transparent 0),
+            linear-gradient(to top, #53FC18 6px, transparent 0);
+
+    /* Prevent the backgrounds from repeating */
+    background-repeat: no-repeat;
+
+    /* Position each gradient in its respective corner */
+    background-position:
+            top left,
+            top left,
+            top right,
+            top right,
+            bottom left,
+            bottom left,
+            bottom right,
+            bottom right;
+
+    /* Size each gradient to create the frames */
+    background-size:
+            16px 16px, /* Top-Left Horizontal Line */
+            16px 16px, /* Top-Left Vertical Line */
+            16px 16px, /* Top-Right Horizontal Line */
+            16px 16px, /* Top-Right Vertical Line */
+            16px 16px, /* Bottom-Left Horizontal Line */
+            16px 16px, /* Bottom-Left Vertical Line */
+            16px 16px, /* Bottom-Right Horizontal Line */
+            16px 16px; /* Bottom-Right Vertical Line */
+}

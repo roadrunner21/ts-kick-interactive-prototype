@@ -5,7 +5,7 @@
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-60"></div>
     <!-- Content -->
-    <div class="relative z-10 max-w-3xl mx-auto text-center text-white px-4 animate-fadeIn">
+    <div class="relative z-10 max-w-3xl mx-auto text-center kick-frame text-white px-4 animate-fadeIn">
       <blockquote class="text-2xl md:text-3xl font-semibold italic">
         "Key quote or insight from Eddie's conversation with Westcol..."
       </blockquote>
