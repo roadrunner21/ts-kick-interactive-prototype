@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import './style.css';
+import GlitchDirective from './directives/glitch';
 import { showConsoleEasterEgg } from './consoleEasterEgg';
 import { createChatLogic } from './chatLogic';
 
@@ -17,5 +18,7 @@ app.use(pinia);
 
 const chatLogic = createChatLogic(pinia);
 app.provide('chatLogic', chatLogic);
+
+app.directive('glitch', GlitchDirective);
 
 app.mount('#app');

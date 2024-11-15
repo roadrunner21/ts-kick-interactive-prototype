@@ -5,7 +5,7 @@
     <!-- Content -->
     <div class="relative z-10 animate-fadeIn">
       <!-- Title -->
-      <h1 class="text-5xl md:text-6xl font-kickPixel text-kick-highlight mb-4 glitch-text" data-text="Elevating Kick">
+      <h1 class="text-5xl md:text-6xl font-kickPixel text-kick-highlight mb-4 glitch-text" v-glitch>
         Elevating Kick
       </h1>
 
