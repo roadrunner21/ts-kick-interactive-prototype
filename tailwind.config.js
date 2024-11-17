@@ -26,7 +26,7 @@ module.exports = {
         kickPixel: ['KickPixel', 'sans-serif'],
       },
       backgroundImage: theme => ({
-        'inspiration-bg': "url('https://i.ibb.co/c12MMLL/kick-bg.jpg')",
+        'inspiration-bg': "url('https://i.ibb.co/VHFkJB5/kick-bg.jpg')",
         'vhs-noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NgYGBgAAAABQABDQottAAAAABJRU5ErkJggg==')",
         // Additional background images
       }),
