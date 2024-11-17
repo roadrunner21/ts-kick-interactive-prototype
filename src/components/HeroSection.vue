@@ -4,12 +4,12 @@
     <!-- Content -->
     <div class="relative z-10 animate-fadeIn">
       <!-- Title -->
-      <h1 class="text-5xl md:text-6xl font-kickPixel text-kick-highlight mb-4 glitch-text" v-glitch>
+      <h1 class="text-5xl md:text-6xl font-kickPixel text-kick-highlight mb-8 glitch-text" v-glitch>
         Elevating Kick
       </h1>
 
       <!-- Description -->
-      <p class="text-lg md:text-xl text-white max-w-3xl mx-auto">
+      <p class="text-lg md:text-xl text-white mb-4 max-w-3xl mx-auto">
         Leveraging innovation to enhance Kick's community features, boost viewer engagement, and empower creators with cutting-edge tools.
       </p>
       <!-- Call-to-Action Button -->
