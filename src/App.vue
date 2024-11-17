@@ -6,6 +6,9 @@
     <!-- About Me Section with ref -->
     <AboutMe ref="aboutMeRef" />
 
+    <!-- Highlights Section -->
+    <HighlightsSection />
+
     <!-- Other Sections -->
     <InspirationSection />
     <IdentifiedChallenges />
@@ -35,10 +38,12 @@ import ProposedSolutions from '@/components/ProposedSolutions.vue';
 import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
 import AdditionalIdeas from '@/components/AdditionalIdeas.vue';
 import CallToAction from '@/components/CallToAction.vue';
+import HighlightsSection from "@/components/HighlightsSection.vue";
 
 export default defineComponent({
   name: 'App',
   components: {
+    HighlightsSection,
     HeroSection,
     AboutMe,
     InspirationSection,
