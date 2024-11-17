@@ -78,27 +78,29 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      await nextTick(); // Ensure DOM is updated
+      await nextTick();
 
       if (aboutMeRef.value) {
-        const element = aboutMeRef.value.$el; // Access the root DOM element of the AboutMe component
+        const element = aboutMeRef.value.$el;
 
         // Trigger smooth scroll when AboutMe enters the viewport
         ScrollTrigger.create({
           trigger: element,
-          start: 'top bottom', // Trigger when AboutMe's top reaches the bottom of the viewport
-          onEnter: () => {
-            console.log(
-                'AboutMe section has entered the viewport. Triggering smooth scroll.',
-            );
+          start: 'top bottom',
+          onEnter: (self) => {
+            console.log('AboutMe section has entered the viewport. Triggering smooth scroll.');
             scrollToAboutMe();
+
+            // Kill the trigger after use
+            self.kill();
           },
-          markers: import.meta.env.DEV, // Enable markers in development
+          markers: import.meta.env.DEV,
         });
       } else {
         console.error('aboutMeRef is not assigned!');
       }
     });
+
 
     onUnmounted(() => {
       // Clean up ScrollTriggers
