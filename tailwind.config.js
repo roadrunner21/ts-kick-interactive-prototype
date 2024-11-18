@@ -20,6 +20,10 @@ module.exports = {
         'kick-accent': '#1DB954', // For text highlights
         'kick-gradient-start': '#141517',
         'kick-gradient-end': '#53FC18',
+        darkRed: '#1A0E0F', // Extremely dark red
+        darkRedHover: '#241416', // Slightly lighter for hover
+        darkKickGreen: '#0E1A0F', // Extremely dark green
+        darkKickGreenHover: '#162418', // Slightly lighter for hover
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

@@ -10,7 +10,7 @@
         <!-- Challenge Card -->
         <div class="md:w-1/2 p-6">
           <div
-              class="bg-gray-800 rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-xl hover:scale-105"
+              class="bg-gradient-to-b from-darkRed via-darkRedHover to-darkRed rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
           >
             <div class="flex items-center mb-4">
               <span
@@ -23,7 +23,7 @@
               ></component>
               <h3 class="text-2xl font-semibold">{{ pair.challenge.title }}</h3>
             </div>
-            <p class="flex-grow">{{ pair.challenge.description }}</p>
+            <p class="flex-grow text-gray-300">{{ pair.challenge.description }}</p>
             <p class="mt-4 text-gray-400">
               <strong>Impact:</strong> {{ pair.challenge.impact }}
             </p>
@@ -33,7 +33,7 @@
         <!-- Solution Card -->
         <div class="md:w-1/2 p-6">
           <div
-              class="bg-gray-800 rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-xl hover:scale-105"
+              class="bg-gradient-to-b from-darkKickGreen via-darkKickGreenHover to-darkKickGreen rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
           >
             <div class="flex items-center mb-4">
               <span
@@ -46,7 +46,7 @@
               ></component>
               <h3 class="text-2xl font-semibold">{{ pair.solution.title }}</h3>
             </div>
-            <p class="flex-grow">{{ pair.solution.description }}</p>
+            <p class="flex-grow text-gray-300">{{ pair.solution.description }}</p>
             <p class="mt-4 text-gray-400">
               <strong>Benefits:</strong> {{ pair.solution.benefits }}
             </p>
@@ -54,7 +54,7 @@
               <img
                   :src="pair.solution.image"
                   alt=""
-                  class="w-full rounded-lg shadow-lg transition-transform duration-500"
+                  class="w-full rounded-lg shadow-lg transition-transform duration-500 hover:scale-105"
               />
             </div>
           </div>
@@ -62,11 +62,13 @@
       </div>
       <!-- Visual Separator -->
       <div class="mt-12">
-        <hr class="border-t border-gray-700" />
+        <hr class="border-t border-kick-border" />
       </div>
     </div>
   </section>
 </template>
+
+
 
 <script lang="ts">
 import { defineComponent } from 'vue';
