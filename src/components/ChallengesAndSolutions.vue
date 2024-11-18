@@ -1,74 +1,78 @@
+<!-- src/components/ChallengesAndSolutions.vue -->
 <template>
-  <section class="py-20 px-4 bg-kick-bg text-kick-text">
-    <!-- Section Heading -->
-    <h2 class="text-5xl font-bold mb-16 text-center animate-fadeIn">Challenges and Solutions</h2>
+  <section class="py-20 px-4 bg-section-pattern bg-cover bg-center text-kick-text">
+    <!-- Overlay to Darken the Background Pattern -->
+    <div class="absolute inset-0 opacity-75"></div>
 
-    <!-- Challenge-Solution Pairs -->
-    <div v-for="(pair, index) in challengeSolutionPairs" :key="index" class="mb-24">
-      <!-- Pair Container -->
-      <div class="flex flex-col md:flex-row items-stretch animate-fadeIn">
-        <!-- Challenge Card -->
-        <div class="md:w-1/2 p-6">
-          <div
-              class="bg-gradient-to-b from-darkRed via-darkRedHover to-darkRed rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
-          >
-            <div class="flex items-center mb-4">
-              <span
-                  class="px-2 py-1 bg-red-500 text-white text-sm font-semibold rounded mr-2"
-              >Challenge</span
-              >
-              <component
-                  :is="pair.challenge.icon"
-                  class="h-8 w-8 text-red-500 mr-2"
-              ></component>
-              <h3 class="text-2xl font-semibold">{{ pair.challenge.title }}</h3>
-            </div>
-            <p class="flex-grow text-gray-300">{{ pair.challenge.description }}</p>
-            <p class="mt-4 text-gray-400">
-              <strong>Impact:</strong> {{ pair.challenge.impact }}
-            </p>
-          </div>
-        </div>
+    <div class="relative z-10">
+      <!-- Section Heading -->
+      <h2 class="text-5xl font-bold mb-16 text-center animate-fadeIn">Challenges and Solutions</h2>
 
-        <!-- Solution Card -->
-        <div class="md:w-1/2 p-6">
-          <div
-              class="bg-gradient-to-b from-darkKickGreen via-darkKickGreenHover to-darkKickGreen rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
-          >
-            <div class="flex items-center mb-4">
-              <span
-                  class="px-2 py-1 bg-kick-highlight text-black text-sm font-semibold rounded mr-2"
-              >Solution</span
-              >
-              <component
-                  :is="pair.solution.icon"
-                  class="h-8 w-8 text-kick-highlight mr-2"
-              ></component>
-              <h3 class="text-2xl font-semibold">{{ pair.solution.title }}</h3>
-            </div>
-            <p class="flex-grow text-gray-300">{{ pair.solution.description }}</p>
-            <p class="mt-4 text-gray-400">
-              <strong>Benefits:</strong> {{ pair.solution.benefits }}
-            </p>
-            <div class="mt-4">
-              <img
-                  :src="pair.solution.image"
-                  alt=""
-                  class="w-full rounded-lg shadow-lg transition-transform duration-500 hover:scale-105"
-              />
+      <!-- Challenge-Solution Pairs -->
+      <div v-for="(pair, index) in challengeSolutionPairs" :key="index" class="mb-24">
+        <!-- Pair Container -->
+        <div class="flex flex-col md:flex-row items-stretch animate-fadeIn">
+          <!-- Challenge Card -->
+          <div class="md:w-1/2 p-6">
+            <div
+                class="bg-gradient-to-b from-darkRed via-darkRedHover to-darkRed rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
+            >
+              <div class="flex items-center mb-4">
+                <span
+                    class="px-2 py-1 bg-red-600 text-white text-sm font-semibold rounded mr-2"
+                >Challenge</span
+                >
+                <component
+                    :is="pair.challenge.icon"
+                    class="h-8 w-8 text-red-500 mr-2"
+                ></component>
+                <h3 class="text-2xl font-semibold">{{ pair.challenge.title }}</h3>
+              </div>
+              <p class="flex-grow text-gray-300">{{ pair.challenge.description }}</p>
+              <p class="mt-4 text-gray-400">
+                <strong>Impact:</strong> {{ pair.challenge.impact }}
+              </p>
             </div>
           </div>
+
+          <!-- Solution Card -->
+          <div class="md:w-1/2 p-6">
+            <div
+                class="bg-gradient-to-b from-darkKickGreen via-darkKickGreenHover to-darkKickGreen rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
+            >
+              <div class="flex items-center mb-4">
+                <span
+                    class="px-2 py-1 bg-kick-highlight text-black text-sm font-semibold rounded mr-2"
+                >Solution</span
+                >
+                <component
+                    :is="pair.solution.icon"
+                    class="h-8 w-8 text-kick-highlight mr-2"
+                ></component>
+                <h3 class="text-2xl font-semibold">{{ pair.solution.title }}</h3>
+              </div>
+              <p class="flex-grow text-gray-300">{{ pair.solution.description }}</p>
+              <p class="mt-4 text-gray-400">
+                <strong>Benefits:</strong> {{ pair.solution.benefits }}
+              </p>
+              <div class="mt-4">
+                <img
+                    :src="pair.solution.image"
+                    alt="Illustration of {{ pair.solution.title }}"
+                    class="w-full rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <!-- Visual Separator -->
-      <div class="mt-12">
-        <hr class="border-t border-kick-border" />
+        <!-- Visual Separator -->
+        <div class="mt-12">
+          <hr class="border-t border-kick-border" />
+        </div>
       </div>
     </div>
   </section>
 </template>
-
-
 
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -232,5 +236,30 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Tailwind classes used for animations and styling */
+/* Ensure the section background covers the entire area */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional: Add a subtle overlay for better text contrast */
+section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(20, 21, 23, 0.85); /* Semi-transparent overlay */
+  z-index: 0;
+}
+
+section > div.relative.z-10 {
+  position: relative;
+  z-index: 10;
+}
+
+/* Ensure images are responsive */
+img {
+  object-fit: cover;
+}
+
+/* Tailwind's animate-fadeIn class is assumed to be defined via the tailwindcss-animate plugin */
 </style>
