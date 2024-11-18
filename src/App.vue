@@ -11,8 +11,7 @@
 
     <!-- Other Sections -->
     <InspirationSection />
-    <IdentifiedChallenges />
-    <ProposedSolutions />
+    <ChallengesAndSolutions/>
     <PrototypeDemonstration />
     <AdditionalIdeas />
     <CallToAction />
@@ -33,12 +32,11 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import HeroSection from '@/components/HeroSection.vue';
 import AboutMe from '@/components/AboutMe.vue';
 import InspirationSection from '@/components/InspirationSection.vue';
-import IdentifiedChallenges from '@/components/IdentifiedChallenges.vue';
-import ProposedSolutions from '@/components/ProposedSolutions.vue';
 import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
 import AdditionalIdeas from '@/components/AdditionalIdeas.vue';
 import CallToAction from '@/components/CallToAction.vue';
 import HighlightsSection from "@/components/HighlightsSection.vue";
+import ChallengesAndSolutions from "@/components/ChallengesAndSolutions.vue";
 
 export default defineComponent({
   name: 'App',
@@ -47,8 +45,7 @@ export default defineComponent({
     HeroSection,
     AboutMe,
     InspirationSection,
-    IdentifiedChallenges,
-    ProposedSolutions,
+    ChallengesAndSolutions,
     PrototypeDemonstration,
     AdditionalIdeas,
     CallToAction,
