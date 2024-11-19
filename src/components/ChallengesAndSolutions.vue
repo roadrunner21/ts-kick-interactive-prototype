@@ -52,16 +52,16 @@
                 <h3 class="text-2xl font-semibold">{{ pair.solution.title }}</h3>
               </div>
               <p class="flex-grow text-gray-300">{{ pair.solution.description }}</p>
-              <p class="mt-4 text-gray-400">
-                <strong>Benefits:</strong> {{ pair.solution.benefits }}
-              </p>
-              <div class="mt-4">
+              <div v-if="pair.solution.image" class="mt-4">
                 <img
                     :src="pair.solution.image"
                     alt="Illustration of {{ pair.solution.title }}"
                     class="w-full rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105"
                 />
               </div>
+              <p class="mt-4 text-gray-400 self-end">
+                <strong>Benefits:</strong> {{ pair.solution.benefits }}
+              </p>
             </div>
           </div>
         </div>
@@ -99,6 +99,25 @@ export default defineComponent({
   },
   setup() {
     const challengeSolutionPairs = [
+
+      {
+        challenge: {
+          title: 'Event Participation Difficulties',
+          description:
+              'Viewers rely on external platforms like Discord for event updates, fragmenting the user experience.',
+          impact: 'Fragmented user experience and decreased platform engagement.',
+          icon: 'UsersIcon',
+        },
+        solution: {
+          title: 'Centralized Event Updates',
+          description:
+              'Develop tools for real-time event updates and interactions directly within Kick to keep viewers informed and engaged.',
+          benefits:
+              'Keeps viewers on the platform, eliminates the need for external tools, and improves event participation.',
+          icon: 'UsersIcon',
+          image: 'https://placehold.co/600x400?text=Solution+4',
+        },
+      },
       {
         challenge: {
           title: 'Developer Ecosystem Gaps',
@@ -115,7 +134,6 @@ export default defineComponent({
           benefits:
               'Fosters innovation, drives customization, and creates additional revenue streams.',
           icon: 'AcademicCapIcon',
-          image: 'https://placehold.co/600x400?text=Solution+1',
         },
       },
       {
@@ -129,7 +147,7 @@ export default defineComponent({
         solution: {
           title: 'Hypetrains and Channel Points',
           description:
-              'Implement hypetrains and channel points to gamify viewer participation, boost engagement, and increase donation activity.',
+              'Implement hypetrains, channel points and a ban appeal system to gamify viewer participation, boost engagement, and increase donation activity.',
           benefits:
               'Boosts engagement, increases donation activity, and enhances community experience.',
           icon: 'ChatBubbleLeftEllipsisIcon',
@@ -152,24 +170,6 @@ export default defineComponent({
               'Strengthens emote culture, fosters community bonds, and drives user retention.',
           icon: 'FaceSmileIcon',
           image: 'https://placehold.co/600x400?text=Solution+3',
-        },
-      },
-      {
-        challenge: {
-          title: 'Event Participation Difficulties',
-          description:
-              'Viewers rely on external platforms like Discord for event updates, fragmenting the user experience.',
-          impact: 'Fragmented user experience and decreased platform engagement.',
-          icon: 'UsersIcon',
-        },
-        solution: {
-          title: 'Centralized Event Updates',
-          description:
-              'Develop tools for real-time event updates and interactions directly within Kick to keep viewers informed and engaged.',
-          benefits:
-              'Keeps viewers on the platform, eliminates the need for external tools, and improves event participation.',
-          icon: 'UsersIcon',
-          image: 'https://placehold.co/600x400?text=Solution+4',
         },
       },
       {
@@ -205,25 +205,7 @@ export default defineComponent({
           benefits:
               'Enhances user experience, reduces friction, and increases viewer retention.',
           icon: 'VideoCameraIcon',
-          image: 'https://placehold.co/600x400?text=Solution+6',
-        },
-      },
-      {
-        challenge: {
-          title: 'Community Management Challenges',
-          description:
-              'Kick lacks a transparent system for handling ban appeals, leading to decreased trust and community dissatisfaction.',
-          impact: 'Eroded trust and potential loss of community members.',
-          icon: 'NoSymbolIcon',
-        },
-        solution: {
-          title: 'Ban Appeals System',
-          description:
-              'Develop a streamlined and transparent ban appeals system where users can view and manage their appeals.',
-          benefits:
-              'Improves community trust, ensures fair treatment, and fosters a positive environment.',
-          icon: 'NoSymbolIcon',
-          image: 'https://placehold.co/600x400?text=Solution+7',
+          image: 'https://i.ibb.co/bFJw0n5/Screenshot-2024-11-19-at-13-40-40.jpg',
         },
       },
     ];
