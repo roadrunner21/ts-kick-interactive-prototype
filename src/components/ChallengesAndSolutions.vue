@@ -1,6 +1,6 @@
 <!-- src/components/ChallengesAndSolutions.vue -->
 <template>
-  <section class="py-16 px-4 bg-section-pattern bg-cover bg-center text-kick-text">
+  <section class="py-16 px-4 relative bg-section-pattern bg-cover bg-center text-kick-text">
     <!-- Overlay to Darken the Background Pattern -->
     <div class="absolute inset-0 opacity-75"></div>
 

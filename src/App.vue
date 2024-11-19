@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-kick-bg text-kick-text">
     <!-- Hero Section -->
-    <HeroSection @scroll-down="scrollToAboutMe" />
+    <HeroSection @scroll-down="handleScrollToAboutMe" />
 
     <!-- About Me Section with ref -->
     <AboutMe ref="aboutMeRef" />
@@ -11,7 +11,7 @@
 
     <!-- Other Sections -->
     <InspirationSection />
-    <ChallengesAndSolutions/>
+    <ChallengesAndSolutions />
     <PrototypeDemonstration />
     <CallToAction />
   </div>
@@ -19,22 +19,16 @@
 
 <script lang="ts">
 import {
-  defineComponent,
-  onMounted,
-  onUnmounted,
-  nextTick,
-  ref,
-  Ref,
+ defineComponent, ref, 
 } from 'vue';
-import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import HeroSection from '@/components/HeroSection.vue';
 import AboutMe from '@/components/AboutMe.vue';
 import InspirationSection from '@/components/InspirationSection.vue';
 import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
 import CallToAction from '@/components/CallToAction.vue';
-import HighlightsSection from "@/components/HighlightsSection.vue";
-import ChallengesAndSolutions from "@/components/ChallengesAndSolutions.vue";
+import HighlightsSection from '@/components/HighlightsSection.vue';
+import ChallengesAndSolutions from '@/components/ChallengesAndSolutions.vue';
+import { useSmoothScroll } from '@/composables/useSmoothScroll';
 
 export default defineComponent({
   name: 'App',
@@ -48,62 +42,16 @@ export default defineComponent({
     CallToAction,
   },
   setup() {
-    const aboutMeRef: Ref<InstanceType<typeof AboutMe> | null> = ref(null);
-    let isAnimating = false; // Prevent multiple triggers
+    const aboutMeRef = ref<InstanceType<typeof AboutMe> | null>(null);
+    const { scrollToElement } = useSmoothScroll();
 
-    // Smooth scroll to the AboutMe section
-    const scrollToAboutMe = () => {
-      if (isAnimating || !aboutMeRef.value) return;
-      isAnimating = true;
-
-      const element = aboutMeRef.value.$el; // Access the root DOM element of the AboutMe component
-
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: {
-          y: element,
-          offsetY: 0,
-        },
-        ease: 'power2.inOut',
-        onComplete: () => {
-          isAnimating = false; // Reset flag after animation
-        },
-      });
+    const handleScrollToAboutMe = (): void => {
+      scrollToElement(aboutMeRef.value?.$el || null);
     };
 
-    onMounted(async () => {
-      await nextTick();
-
-      if (aboutMeRef.value) {
-        const element = aboutMeRef.value.$el;
-
-        // Trigger smooth scroll when AboutMe enters the viewport
-        ScrollTrigger.create({
-          trigger: element,
-          start: 'top bottom',
-          onEnter: (self) => {
-            console.log('AboutMe section has entered the viewport. Triggering smooth scroll.');
-            scrollToAboutMe();
-
-            // Kill the trigger after use
-            self.kill();
-          },
-          markers: import.meta.env.DEV,
-        });
-      } else {
-        console.error('aboutMeRef is not assigned!');
-      }
-    });
-
-
-    onUnmounted(() => {
-      // Clean up ScrollTriggers
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    });
-
     return {
-      scrollToAboutMe,
       aboutMeRef,
+      handleScrollToAboutMe,
     };
   },
 });
