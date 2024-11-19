@@ -13,7 +13,6 @@
     <InspirationSection />
     <ChallengesAndSolutions/>
     <PrototypeDemonstration />
-    <AdditionalIdeas />
     <CallToAction />
   </div>
 </template>
@@ -33,7 +32,6 @@ import HeroSection from '@/components/HeroSection.vue';
 import AboutMe from '@/components/AboutMe.vue';
 import InspirationSection from '@/components/InspirationSection.vue';
 import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
-import AdditionalIdeas from '@/components/AdditionalIdeas.vue';
 import CallToAction from '@/components/CallToAction.vue';
 import HighlightsSection from "@/components/HighlightsSection.vue";
 import ChallengesAndSolutions from "@/components/ChallengesAndSolutions.vue";
@@ -47,7 +45,6 @@ export default defineComponent({
     InspirationSection,
     ChallengesAndSolutions,
     PrototypeDemonstration,
-    AdditionalIdeas,
     CallToAction,
   },
   setup() {
