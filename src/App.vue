@@ -47,7 +47,6 @@ export default defineComponent({
 
     /**
      * Handles the manual scroll triggered by the HeroSection's "scroll-down" event.
-     * @returns {void}
      */
     const handleScrollToAboutMe = (): void => {
       scrollToElement(aboutMeRef.value?.$el || null);

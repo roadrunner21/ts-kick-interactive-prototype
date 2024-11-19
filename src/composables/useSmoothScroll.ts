@@ -1,34 +1,18 @@
-// src/composables/useSmoothScroll.ts
-
 import {
  ref, Ref, onUnmounted, 
 } from 'vue';
 
-/**
- * Duration of the scroll animation in milliseconds.
- */
-const ANIMATION_DURATION = 1000;
+const ANIMATION_DURATION = 1000; // Duration of the scroll animation in milliseconds.
 
-/**
- * Type definition for the scrollToElement function.
- */
 type ScrollToElementFunction = (element: HTMLElement | null, offsetY?: number) => void;
-
-/**
- * Type definition for the observeAndScroll function.
- */
 type ObserveAndScrollFunction = (element: HTMLElement | null, offsetY?: number) => void;
 
-/**
- * Provides smooth scrolling functionality and observes elements entering the viewport.
- * @returns An object containing smooth scroll functions and animation state.
- */
 export function useSmoothScroll(): {
   scrollToElement: ScrollToElementFunction;
   observeAndScroll: ObserveAndScrollFunction;
   isAnimating: Ref<boolean>;
 } {
-  const isAnimating = ref(false); // Prevent multiple triggers
+  const isAnimating = ref(false); // Prevent multiple triggers.
   let observer: IntersectionObserver | null = null;
 
   /**
@@ -37,8 +21,13 @@ export function useSmoothScroll(): {
   const scrollToElement: ScrollToElementFunction = (element, offsetY = 0): void => {
     if (isAnimating.value || !element) return;
 
-    isAnimating.value = true;
     const targetPosition = element.getBoundingClientRect().top + window.scrollY - offsetY;
+    const currentPosition = window.scrollY;
+
+    // Skip if already at the target position (allow a small margin of error).
+    if (Math.abs(targetPosition - currentPosition) < 1) return;
+
+    isAnimating.value = true;
 
     window.scrollTo({
       top: targetPosition,
@@ -46,7 +35,7 @@ export function useSmoothScroll(): {
     });
 
     setTimeout(() => {
-      isAnimating.value = false; // Reset after animation
+      isAnimating.value = false; // Reset after animation.
     }, ANIMATION_DURATION);
   };
 
@@ -62,7 +51,14 @@ export function useSmoothScroll(): {
     const callback: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+          const targetPosition = entry.target.getBoundingClientRect().top + window.scrollY - offsetY;
+          const currentPosition = window.scrollY;
+
+          // Avoid scrolling if already near the target.
+          if (Math.abs(targetPosition - currentPosition) < 1) return;
+
           scrollToElement(entry.target, offsetY);
+
           if (observer) {
             observer.unobserve(entry.target);
             observer.disconnect();
@@ -73,14 +69,13 @@ export function useSmoothScroll(): {
     };
 
     observer = new IntersectionObserver(callback, {
-      root: null, // Use the viewport as the root
-      threshold: 0.1, // Trigger when 10% of the element is visible
+      root: null, // Use the viewport as the root.
+      threshold: 0,
     });
 
     observer.observe(element);
   };
 
-  // Cleanup on unmount
   onUnmounted(() => {
     if (observer) {
       observer.disconnect();
