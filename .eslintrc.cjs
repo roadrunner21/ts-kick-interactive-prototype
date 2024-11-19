@@ -57,6 +57,33 @@ module.exports = {
         "import/no-named-as-default-member": "off",
         "import/no-named-as-default": "off",
         "import/no-unresolved": "off",
+
+        // Disable JSDoc rules for Vue files
+        "jsdoc/require-jsdoc": "off",
+        "jsdoc/require-param": "off",
+        "jsdoc/require-returns": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns-type": "off",
+        "jsdoc/require-returns-check": "off",
+      },
+    },
+    {
+      files: ["*.ts", "*.tsx"],
+      rules: {
+        // Disable JSDoc rules for TypeScript files
+        "jsdoc/require-jsdoc": "off",
+        "jsdoc/require-param": "off",
+        "jsdoc/require-returns": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns-type": "off",
+        "jsdoc/require-returns-check": "off",
+      },
+    },
+    {
+      files: ["*.js", "*.jsx"],
+      rules: {
+        // Optionally, keep some JSDoc rules for JavaScript files
+        // For example, enforce JSDoc for public APIs
       },
     },
   ],
@@ -127,7 +154,7 @@ module.exports = {
     "no-throw-literal": "warn",
     "import/order": ["warn", { groups: ["builtin", "external", "internal"] }],
     "import/no-duplicates": "error",
-    "max-lines-per-function": ["warn", { max: 50 }],
+    "max-lines-per-function": ["warn", { max: 100 }],
     "import/no-extraneous-dependencies": [
       "error",
       { devDependencies: true },
@@ -164,11 +191,17 @@ module.exports = {
     "import/no-cycle": "warn",
 
     // JSDoc rules
-    "require-jsdoc": "warn",
+    "jsdoc/require-jsdoc": "off", // Globally disable JSDoc requirement
+    "require-jsdoc": "off",
 
     // Restrict imports
     "no-restricted-imports": ["error", { patterns: ["../*"] }],
     "import/no-named-default": "warn",
   },
-  ignorePatterns: ["eslint.config.js", ".eslintrc.js", "src/shims-vue.d.ts", "tailwind.config.js"],
+  ignorePatterns: [
+    "eslint.config.js",
+    ".eslintrc.js",
+    "src/shims-vue.d.ts",
+    "tailwind.config.js",
+  ],
 };

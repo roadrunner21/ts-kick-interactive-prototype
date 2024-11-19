@@ -19,8 +19,9 @@
 
 <script lang="ts">
 import {
- defineComponent, ref, 
+ defineComponent, ref, Ref, onMounted, 
 } from 'vue';
+import { useSmoothScroll } from '@/composables/useSmoothScroll';
 import HeroSection from '@/components/HeroSection.vue';
 import AboutMe from '@/components/AboutMe.vue';
 import InspirationSection from '@/components/InspirationSection.vue';
@@ -28,7 +29,6 @@ import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
 import CallToAction from '@/components/CallToAction.vue';
 import HighlightsSection from '@/components/HighlightsSection.vue';
 import ChallengesAndSolutions from '@/components/ChallengesAndSolutions.vue';
-import { useSmoothScroll } from '@/composables/useSmoothScroll';
 
 export default defineComponent({
   name: 'App',
@@ -42,12 +42,22 @@ export default defineComponent({
     CallToAction,
   },
   setup() {
-    const aboutMeRef = ref<InstanceType<typeof AboutMe> | null>(null);
-    const { scrollToElement } = useSmoothScroll();
+    const aboutMeRef: Ref<InstanceType<typeof AboutMe> | null> = ref(null);
+    const { scrollToElement, observeAndScroll } = useSmoothScroll();
 
+    /**
+     * Handles the manual scroll triggered by the HeroSection's "scroll-down" event.
+     * @returns {void}
+     */
     const handleScrollToAboutMe = (): void => {
       scrollToElement(aboutMeRef.value?.$el || null);
     };
+
+    onMounted(() => {
+      if (aboutMeRef.value) {
+        observeAndScroll(aboutMeRef.value.$el, 0);
+      }
+    });
 
     return {
       aboutMeRef,
