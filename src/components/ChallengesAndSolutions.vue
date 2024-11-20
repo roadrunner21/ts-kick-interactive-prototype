@@ -185,7 +185,7 @@ export default defineComponent({
           benefits:
               'Strengthens emote culture, fosters community bonds, and drives user retention.',
           icon: 'FaceSmileIcon',
-          image: 'https://placehold.co/600x400?text=Solution+3',
+          image: 'https://i.ibb.co/y6VBv3h/Screenshot-2024-11-20-at-17-18-24.png',
         },
       },
       {
@@ -203,7 +203,7 @@ export default defineComponent({
           benefits:
               'Facilitates collaborations, enriches viewer experience, and attracts new partnerships.',
           icon: 'UserGroupIcon',
-          image: 'https://placehold.co/600x400?text=Solution+5',
+          image: 'https://contenthub-cdn.streamlabs.com/static/imgs/posts/collab%20cam%20pvp%20game2.png',
         },
       },
       {
