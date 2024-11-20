@@ -1,7 +1,7 @@
 <!-- src/components/PrototypeDemonstration.vue -->
 
 <template>
-  <section class="py-20 px-4 bg-black text-kick-text">
+  <section class="py-20 px-4 text-kick-text bg-kick-bg">
     <h2 class="section-heading">Prototype Demonstration</h2>
     <p class="max-w-2xl mx-auto mb-6 text-center">
       Explore the interactive prototype below to see how these solutions come to life.
