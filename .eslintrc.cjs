@@ -154,7 +154,6 @@ module.exports = {
     "no-throw-literal": "warn",
     "import/order": ["warn", { groups: ["builtin", "external", "internal"] }],
     "import/no-duplicates": "error",
-    "max-lines-per-function": ["warn", { max: 100 }],
     "import/no-extraneous-dependencies": [
       "error",
       { devDependencies: true },
