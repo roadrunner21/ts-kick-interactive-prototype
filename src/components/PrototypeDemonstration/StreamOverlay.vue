@@ -1,57 +1,60 @@
+<!-- src/components/PrototypeDemonstration/StreamOverlay.vue -->
 <template>
   <div
       ref="overlay"
-      class="absolute bg-kick-bg bg-opacity-90 text-kick-text p-4 rounded-lg shadow-lg cursor-move"
-  :class="[
-  isExpanded ? 'w-80' : 'w-64 h-12 flex items-center justify-between',
-  'transform',
-  ]"
-  @mousedown="startDrag"
-  role="button"
-  tabindex="0"
-  aria-label="Draggable Overlay"
+      class="absolute bg-kick-bg bg-opacity-90 text-kick-text rounded-lg shadow-lg cursor-move"
+      :class="[
+      isExpanded
+        ? 'w-80 p-4 max-h-96 overflow-y-auto'
+        : 'w-64 p-2 h-12 flex items-center justify-between',
+      'transform',
+    ]"
+      @mousedown="startDrag"
+      role="button"
+      tabindex="0"
+      aria-label="Draggable Overlay"
   >
-  <!-- Header Section -->
-  <div class="flex items-center justify-between w-full">
-    <h2 class="text-lg font-semibold text-kick-highlight">Event Overlay</h2>
-    <button
-        @click.stop="toggleExpand"
-        class="text-sm text-kick-highlight hover:text-kick-highlight-hover focus:outline-none"
-    >
-      {{ isExpanded ? 'Minimize' : 'Expand' }}
-    </button>
-  </div>
-
-  <!-- Expanded Content -->
-  <div v-if="isExpanded" class="mt-4">
-    <!-- Current Clue Section -->
-    <div class="mb-4">
-      <h3 class="text-md font-semibold text-kick-highlight">Current Clue</h3>
-      <p class="text-sm">{{ currentClue }}</p>
+    <!-- Header Section -->
+    <div class="flex items-center justify-between w-full">
+      <h2 class="text-lg font-semibold text-kick-highlight">Event Overlay</h2>
+      <button
+          @click.stop="toggleExpand"
+          class="text-sm text-kick-highlight hover:text-kick-highlight-hover focus:outline-none"
+      >
+        {{ isExpanded ? 'Minimize' : 'Expand' }}
+      </button>
     </div>
 
-    <!-- Progress Section -->
-    <div>
-      <h3 class="text-md font-semibold text-kick-highlight">Progress</h3>
-      <ul class="space-y-1">
-        <li
-            v-for="(clue, index) in clues"
-            :key="index"
-            class="flex items-center"
-        >
+    <!-- Expanded Content -->
+    <div v-if="isExpanded" class="mt-4">
+      <!-- Current Clue Section -->
+      <div class="mb-4">
+        <h3 class="text-md font-semibold text-kick-highlight">Current Clue</h3>
+        <p class="text-sm">{{ currentClue }}</p>
+      </div>
+
+      <!-- Progress Section -->
+      <div>
+        <h3 class="text-md font-semibold text-kick-highlight">Progress</h3>
+        <ul class="space-y-1">
+          <li
+              v-for="(clue, index) in clues"
+              :key="index"
+              class="flex items-center"
+          >
             <span
                 class="h-2 w-2 rounded-full mr-2"
                 :class="clue.solved ? 'bg-kick-highlight' : 'bg-kick-label'"
             ></span>
-          <span
-              :class="clue.solved ? 'line-through text-kick-label' : 'text-kick-text'"
-          >
+            <span
+                :class="clue.solved ? 'line-through text-kick-label' : 'text-kick-text'"
+            >
               {{ clue.text }}
             </span>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -71,11 +74,9 @@ const UPDATE_DELAY_CLUE_2 = 10000;
 export default defineComponent({
   name: 'StreamOverlay',
   setup() {
-    // Reactive state variables
     const isExpanded = ref<boolean>(false);
     const overlay = ref<HTMLElement | null>(null);
 
-    // Position variables
     const pos = {
  x: 10, y: 10, 
 }; // Initial position set to 10px from top and left
@@ -198,7 +199,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-/* No custom CSS; all styling is handled by Tailwind */
-</style>
