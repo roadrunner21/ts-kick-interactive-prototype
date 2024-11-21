@@ -2,14 +2,15 @@
 <template>
   <div
       ref="overlay"
-      class="absolute bg-kick-bg bg-opacity-90 text-kick-text rounded-lg shadow-lg cursor-move"
+      class="absolute bg-kick-bg bg-opacity-90 text-kick-text rounded-lg shadow-lg cursor-move select-none"
       :class="[
-      isExpanded
-        ? 'w-80 p-4 max-h-96 overflow-y-auto'
-        : 'w-64 p-2 h-12 flex items-center justify-between',
-      'transform',
-    ]"
+        isExpanded
+          ? 'w-80 p-4 max-h-96 overflow-y-auto'
+          : 'w-64 p-2 h-12 flex items-center justify-between',
+        'transform',
+      ]"
       @mousedown="startDrag"
+      @touchstart="startDrag"
       role="button"
       tabindex="0"
       aria-label="Draggable Overlay"
@@ -40,7 +41,7 @@
           <li
               v-for="(clue, index) in clues"
               :key="index"
-              class="flex items-center"
+              class="flex items-center mb-1"
           >
             <span
                 class="h-2 w-2 rounded-full mr-2"
@@ -78,11 +79,11 @@ export default defineComponent({
     const overlay = ref<HTMLElement | null>(null);
 
     const pos = {
- x: 10, y: 10, 
+ x: 10, y: 10,
 }; // Initial position set to 10px from top and left
     let isDragging = false;
     const dragOffset = {
- x: 0, y: 0, 
+ x: 0, y: 0,
 };
     let animationFrame: number | null = null;
 
@@ -90,17 +91,14 @@ export default defineComponent({
     const currentClue = ref<string>('Find the landmark where music fills the air.');
     const clues = ref<Array<{ text: string; solved: boolean }>>([
       {
-        text: 'Clue 1: Locate the tallest building.',
-        solved: true,
-      },
+ text: 'Clue 1: Locate the tallest building.', solved: true,
+},
       {
-        text: 'Clue 2: Discover the oldest bookstore.',
-        solved: false,
-      },
+ text: 'Clue 2: Discover the oldest bookstore.', solved: false,
+},
       {
-        text: 'Clue 3: Where art meets the streets.',
-        solved: false,
-      },
+ text: 'Clue 3: Where art meets the streets.', solved: false,
+},
     ]);
 
     // Toggle expand/minimize
@@ -115,9 +113,23 @@ export default defineComponent({
       }
     };
 
-    // Start dragging with mouse
-    const startDrag = (event: MouseEvent): void => {
+    // Start dragging with mouse or touch
+    const startDrag = (event: MouseEvent | TouchEvent): void => {
       isDragging = true;
+
+      let clientX: number;
+      let clientY: number;
+
+      if (event instanceof MouseEvent) {
+        clientX = event.clientX;
+        clientY = event.clientY;
+      } else if (event instanceof TouchEvent) {
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
+        event.preventDefault(); // Prevent scrolling
+      } else {
+        return;
+      }
 
       const transform = overlay.value?.style.transform;
       const match = /translate\((.*)px,\s*(.*)px\)/.exec(transform || '');
@@ -126,19 +138,41 @@ export default defineComponent({
         pos.y = parseFloat(match[2]);
       }
 
-      dragOffset.x = event.clientX - pos.x;
-      dragOffset.y = event.clientY - pos.y;
+      dragOffset.x = clientX - pos.x;
+      dragOffset.y = clientY - pos.y;
 
       window.addEventListener('mousemove', onDrag);
       window.addEventListener('mouseup', stopDrag);
+      window.addEventListener('touchmove', onDrag, {
+ passive: false,
+});
+      window.addEventListener('touchend', stopDrag);
     };
 
-    // Drag handler
-    const onDrag = (event: MouseEvent): void => {
+    // Drag handler for mouse and touch
+    const onDrag = (event: MouseEvent | TouchEvent): void => {
       if (!isDragging) return;
 
-      pos.x = event.clientX - dragOffset.x;
-      pos.y = event.clientY - dragOffset.y;
+      let clientX: number;
+      let clientY: number;
+
+      if (event instanceof MouseEvent) {
+        clientX = event.clientX;
+        clientY = event.clientY;
+      } else if (event instanceof TouchEvent) {
+        if (event.touches.length > 0) {
+          clientX = event.touches[0].clientX;
+          clientY = event.touches[0].clientY;
+          event.preventDefault(); // Prevent scrolling
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+
+      pos.x = clientX - dragOffset.x;
+      pos.y = clientY - dragOffset.y;
 
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
@@ -154,6 +188,8 @@ export default defineComponent({
       isDragging = false;
       window.removeEventListener('mousemove', onDrag);
       window.removeEventListener('mouseup', stopDrag);
+      window.removeEventListener('touchmove', onDrag);
+      window.removeEventListener('touchend', stopDrag);
 
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
@@ -182,6 +218,8 @@ export default defineComponent({
     onBeforeUnmount((): void => {
       window.removeEventListener('mousemove', onDrag);
       window.removeEventListener('mouseup', stopDrag);
+      window.removeEventListener('touchmove', onDrag);
+      window.removeEventListener('touchend', stopDrag);
 
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
@@ -199,3 +237,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+/* No additional styles needed */
+</style>

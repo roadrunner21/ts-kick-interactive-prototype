@@ -1,10 +1,14 @@
 <template>
-  <div class="aspect-w-16 aspect-h-9 rounded-lg flex flex-col items-center justify-center relative vhs-effect bg-inspiration-bg">
+  <div class="aspect-w-16 aspect-h-9 rounded-lg vhs-effect bg-inspiration-bg">
+    <div class="flex flex-col items-center justify-center ">
     <!-- Streamer's Emotive Reaction -->
     <StreamerSmiley :emotion="smileyEmotion" />
 
+    </div>
+    <div>
     <!-- Stream Overlay -->
     <StreamOverlay />
+    </div>
   </div>
 </template>
 
