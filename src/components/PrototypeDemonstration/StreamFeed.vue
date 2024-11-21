@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import {
- defineComponent, computed, 
+ defineComponent, computed,
 } from 'vue';
 import { useSentimentStore } from '@/stores/sentimentStore';
 import StreamOverlay from "@/components/PrototypeDemonstration/StreamOverlay.vue";
