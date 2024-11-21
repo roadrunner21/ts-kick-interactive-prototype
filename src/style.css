@@ -6,6 +6,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    /* Custom Scrollbar Styles */
+    /* For Firefox */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: hsla(0, 0%, 100%, 0.25) transparent;
+    }
+
+    /* For WebKit Browsers (Chrome, Safari, Edge) */
+    *::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        border-radius: 15px;
+        background-clip: padding-box;
+        border: 5px solid hsla(0, 0%, 100%, 0.25);
+        background-color: #ffffff; /* Adjust to match your design if needed */
+    }
+}
+
 @layer components {
     /* VHS Effect - Generic Effect */
     .vhs-effect {
