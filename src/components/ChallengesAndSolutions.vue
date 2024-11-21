@@ -131,7 +131,7 @@ export default defineComponent({
           benefits:
               'Keeps viewers on the platform, eliminates the need for external tools, and improves event participation.',
           icon: 'UsersIcon',
-          image: 'https://placehold.co/600x400?text=Solution+4',
+          image: 'https://i.ibb.co/Cs1ZJ7t/Screenshot-2024-11-21-at-11-40-44.png',
         },
       },
       {
