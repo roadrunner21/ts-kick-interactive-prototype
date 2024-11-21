@@ -37,11 +37,11 @@
       <!-- Progress Section -->
       <div>
         <h3 class="text-md font-semibold text-kick-highlight">Progress</h3>
-        <ul class="space-y-1">
+        <ul>
           <li
               v-for="(clue, index) in clues"
               :key="index"
-              class="flex items-center mb-1"
+              class="flex items-center mb-1 last:mb-0"
           >
             <span
                 class="h-2 w-2 rounded-full mr-2"
@@ -68,10 +68,6 @@ import {
   nextTick,
 } from 'vue';
 
-// Define constants for magic numbers
-const UPDATE_DELAY_CLUE_1 = 5000;
-const UPDATE_DELAY_CLUE_2 = 10000;
-
 export default defineComponent({
   name: 'StreamOverlay',
   setup() {
@@ -79,31 +75,68 @@ export default defineComponent({
     const overlay = ref<HTMLElement | null>(null);
 
     const pos = {
- x: 10, y: 10,
+ x: 10, y: 10, 
 }; // Initial position set to 10px from top and left
     let isDragging = false;
     const dragOffset = {
- x: 0, y: 0,
+ x: 0, y: 0, 
 };
     let animationFrame: number | null = null;
 
-    // Current Clue and Progress
+    // Clue Progression
     const currentClue = ref<string>('Find the landmark where music fills the air.');
     const clues = ref<Array<{ text: string; solved: boolean }>>([
       {
- text: 'Clue 1: Locate the tallest building.', solved: true,
+ text: 'Clue 1: Locate the tallest building.', solved: true, 
 },
       {
- text: 'Clue 2: Discover the oldest bookstore.', solved: false,
+ text: 'Clue 2: Discover the oldest bookstore.', solved: false, 
 },
       {
- text: 'Clue 3: Where art meets the streets.', solved: false,
+ text: 'Clue 3: Where art meets the streets.', solved: false, 
 },
     ]);
+
+    // Timeout IDs to manage cleanup
+    let clueTimeout1: number | null = null;
+    let clueTimeout2: number | null = null;
 
     // Toggle expand/minimize
     const toggleExpand = (): void => {
       isExpanded.value = !isExpanded.value;
+      if (isExpanded.value) {
+        startClueProcess();
+      } else {
+        clearClueProcess();
+      }
+    };
+
+    const UPDATE_DELAY_CLUE_1 = 5000
+    const UPDATE_DELAY_CLUE_2 = 10000
+
+    // Start Clue Process
+    const startClueProcess = (): void => {
+      clueTimeout1 = window.setTimeout(() => {
+        clues.value[1].solved = true;
+        currentClue.value = 'Where art meets the streets.';
+      }, UPDATE_DELAY_CLUE_1);
+
+      clueTimeout2 = window.setTimeout(() => {
+        clues.value[2].solved = true;
+        currentClue.value = 'All clues solved!';
+      }, UPDATE_DELAY_CLUE_2);
+    };
+
+    // Clear Clue Process
+    const clearClueProcess = (): void => {
+      if (clueTimeout1) {
+        clearTimeout(clueTimeout1);
+        clueTimeout1 = null;
+      }
+      if (clueTimeout2) {
+        clearTimeout(clueTimeout2);
+        clueTimeout2 = null;
+      }
     };
 
     // Update position using CSS transform
@@ -144,7 +177,7 @@ export default defineComponent({
       window.addEventListener('mousemove', onDrag);
       window.addEventListener('mouseup', stopDrag);
       window.addEventListener('touchmove', onDrag, {
- passive: false,
+ passive: false, 
 });
       window.addEventListener('touchend', stopDrag);
     };
@@ -201,17 +234,6 @@ export default defineComponent({
       nextTick(() => {
         updatePosition();
       });
-
-      // Simulate dynamic updates for prototype
-      setTimeout((): void => {
-        clues.value[1].solved = true;
-        currentClue.value = 'Where art meets the streets.';
-      }, UPDATE_DELAY_CLUE_1);
-
-      setTimeout((): void => {
-        clues.value[2].solved = true;
-        currentClue.value = 'All clues solved!';
-      }, UPDATE_DELAY_CLUE_2);
     });
 
     // Cleanup before unmounting
@@ -224,6 +246,8 @@ export default defineComponent({
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
+
+      clearClueProcess();
     });
 
     return {
@@ -239,5 +263,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* No additional styles needed */
+/* Removed space-y-1; handled spacing via mb-1 in li elements */
 </style>
