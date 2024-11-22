@@ -150,6 +150,7 @@ export default defineComponent({
           benefits:
               'Fosters innovation, drives customization, and creates additional revenue streams.',
           icon: 'AcademicCapIcon',
+          image: 'https://i.ibb.co/c2S47DX/Screenshot-2024-11-23-at-04-09-01.jpg',
         },
       },
       {
@@ -167,7 +168,7 @@ export default defineComponent({
           benefits:
               'Boosts engagement, increases donation activity, and enhances community experience.',
           icon: 'ChatBubbleLeftEllipsisIcon',
-          image: 'https://placehold.co/600x400?text=Solution+2',
+          image: 'https://i.ibb.co/yVP02Wp/Screenshot-2024-11-23-at-04-59-31.png',
         },
       },
       {

@@ -6,7 +6,7 @@
     <p class="max-w-2xl mx-auto mb-6 text-center">
       Explore the interactive prototype below to see how these solutions come to life.
     </p>
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-6xl mx-auto">
       <PrototypeComponent />
     </div>
   </section>
