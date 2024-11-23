@@ -20,10 +20,10 @@ module.exports = {
         'kick-accent': '#1DB954', // For text highlights
         'kick-gradient-start': '#141517',
         'kick-gradient-end': '#53FC18',
-        'darkRed': '#1A0E0F', // Extremely dark red
-        'darkRedHover': '#241416', // Slightly lighter dark red for hover
-        'darkKickGreen': '#0E1A0F', // Extremely dark green
-        'darkKickGreenHover': '#162418', // Slightly lighter dark green for hover
+        'dark-red': '#1A0E0F', // Extremely dark red
+        'dark-red-hover': '#241416', // Slightly lighter dark red for hover
+        'dark-kick-green': '#0E1A0F', // Extremely dark green
+        'dark-kick-green-hover': '#162418', // Slightly lighter dark green for hover
         'section-bg-pattern': '#1A1A1A', // Dark background pattern color
       },
       fontFamily: {

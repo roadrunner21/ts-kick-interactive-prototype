@@ -30,7 +30,7 @@
         <div
             v-for="milestone in activeMilestones"
             :key="milestone.percentage"
-            class="absolute top-0 h-4 w-1 bg-kick-highlight cursor-pointer group"
+            class="absolute top-0 h-4 w-1 bg-kick-accent cursor-pointer group"
             :style="{ left: milestone.percentage + '%' }"
         >
           <!-- Tooltip -->

@@ -21,7 +21,7 @@
           <!-- Challenge Card -->
           <div class="md:w-1/2 p-4 md:p-6">
             <div
-                class="bg-gradient-to-b from-darkRed via-darkRedHover to-darkRed rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
+                class="bg-gradient-to-b from-dark-red via-dark-red-hover to-dark-red rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
             >
               <div class="flex items-center mb-3">
                 <span
@@ -49,7 +49,7 @@
           <!-- Solution Card -->
           <div class="md:w-1/2 p-4 md:p-6 mt-8 md:mt-0">
             <div
-                class="bg-gradient-to-b from-darkKickGreen via-darkKickGreenHover to-darkKickGreen rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
+                class="bg-gradient-to-b from-dark-kick-green via-dark-kick-green-hover to-dark-kick-green rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
             >
               <div class="flex items-center mb-3">
                 <span
