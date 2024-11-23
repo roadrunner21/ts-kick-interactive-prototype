@@ -6,17 +6,14 @@
     </div>
 
     <!-- Main Content Area -->
-    <div class="relative flex flex-1">
+    <div class="relative flex flex-1 overflow-hidden">
       <!-- Hype Train (if active) -->
-      <HypeTrain
-          v-if="donationStore.hypeTrainActive"
-          class="absolute top-0 left-0 right-0 z-10"
-      />
+      <HypeTrain class="absolute top-0 left-0 right-0 z-10" />
 
       <!-- Chat Messages Container -->
       <div
           ref="chatContainer"
-          class="flex-1 overflow-y-auto p-2 pt-12 sm:p-4 sm:pt-16 min-h-[400px] max-h-[400px]"
+          class="flex-1 overflow-y-auto p-2 pt-12 sm:p-4 sm:pt-16 min-h-[600px] max-h-[600px]"
           @scroll="onScroll"
           tabindex="0"
       >

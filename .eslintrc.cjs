@@ -80,6 +80,18 @@ module.exports = {
       },
     },
     {
+      files: ["*.vue", "*.ts", "*.tsx"],
+      rules: {
+        "@typescript-eslint/no-magic-numbers": [
+          "warn",
+          {
+            ignore: [-1, 0, 1, 2, 10, 60, 100],
+            ignoreArrayIndexes: true,
+          },
+        ],
+      },
+    },
+    {
       files: ["*.js", "*.jsx"],
       rules: {
         // Optionally, keep some JSDoc rules for JavaScript files
@@ -163,7 +175,7 @@ module.exports = {
     "no-magic-numbers": [
       "warn",
       {
-        ignore: [0, 1],
+        ignore: [-1, 0, 1, 2, 10, 60, 100],
         ignoreArrayIndexes: true,
       },
     ],
