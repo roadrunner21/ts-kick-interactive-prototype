@@ -16,15 +16,9 @@
     </button>
     <button
         class="bg-kick-highlight text-kick-bg py-2 px-4 rounded hover:bg-kick-highlight-hover"
-        @click="donate(100)"
+        @click="donate(60)"
     >
-      Donate $100
-    </button>
-    <button
-        class="bg-kick-highlight text-kick-bg py-2 px-4 rounded hover:bg-kick-highlight-hover"
-        @click="donate(500)"
-    >
-      Donate $500
+      Donate $60
     </button>
   </div>
 </template>

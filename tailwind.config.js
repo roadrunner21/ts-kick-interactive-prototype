@@ -44,6 +44,8 @@ module.exports = {
         'pulseSlow': 'pulse 2s infinite',
         'bounceSlow': 'bounce 2s infinite',
         'glow': 'glowAnimation 1s ease-in-out infinite',
+        'fadeOut': 'fadeOut 1s forwards',
+        'bounceFadeOut': 'bounceFadeOut 1.5s forwards',
       },
       keyframes: {
         gradientShift: {
@@ -68,7 +70,28 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-
+        fadeOut: {
+          '0%': { opacity: 1, transform: 'scale(1)' },
+          '100%': { opacity: 0, transform: 'scale(1.5)' },
+        },
+        bounceFadeOut: {
+          '0%, 20%, 50%, 80%': {
+            transform: 'translateY(0)',
+            opacity: 1,
+          },
+          '40%': {
+            transform: 'translateY(-30px)',
+            opacity: 1,
+          },
+          '60%': {
+            transform: 'translateY(-15px)',
+            opacity: 1,
+          },
+          '100%': {
+            opacity: 0,
+            transform: 'translateY(0)',
+          },
+        },
         // Additional keyframes if needed
       },
     },
