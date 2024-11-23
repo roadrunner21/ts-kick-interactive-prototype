@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import {
- defineComponent, ref, Ref, onMounted, 
+  defineComponent, ref, Ref, onMounted, onUnmounted,
 } from 'vue';
 import { useSmoothScroll } from '@/composables/useSmoothScroll';
 import HeroSection from '@/components/HeroSection.vue';
@@ -46,7 +46,24 @@ export default defineComponent({
   },
   setup() {
     const aboutMeRef: Ref<InstanceType<typeof AboutMe> | null> = ref(null);
-    const { scrollToElement, observeAndScroll } = useSmoothScroll();
+    const { scrollToElement } = useSmoothScroll();
+
+    const onScroll = (): void => {
+      if (window.scrollY > 0 && aboutMeRef.value?.$el) {
+        scrollToElement(aboutMeRef.value.$el);
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+
+    onMounted(() => {
+      if (window.scrollY === 0 && aboutMeRef.value) {
+        window.addEventListener('scroll', onScroll);
+      }
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', onScroll);
+    });
 
     /**
      * Handles the manual scroll triggered by the HeroSection's "scroll-down" event.
@@ -54,12 +71,6 @@ export default defineComponent({
     const handleScrollToAboutMe = (): void => {
       scrollToElement(aboutMeRef.value?.$el || null);
     };
-
-    onMounted(() => {
-      if (window.scrollY === 0 && aboutMeRef.value) {
-        observeAndScroll(aboutMeRef.value.$el, 0);
-      }
-    });
 
     return {
       aboutMeRef,
@@ -69,6 +80,3 @@ export default defineComponent({
 });
 </script>
 
-<style>
-/* Global styles */
-</style>
