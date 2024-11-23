@@ -1,3 +1,4 @@
+// src/composables/useChatScroll.ts
 import {
  ref, nextTick, Ref, 
 } from 'vue';

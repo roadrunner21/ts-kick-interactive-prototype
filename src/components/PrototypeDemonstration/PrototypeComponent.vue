@@ -1,3 +1,4 @@
+<!-- src/components/PrototypeDemonstration/PrototypeComponent.vue -->
 <template>
   <div class="border border-kick-border rounded-lg overflow-hidden">
     <!-- Donation Buttons Section -->
@@ -13,13 +14,12 @@
       </div>
 
       <!-- Chat Component -->
-      <div class="w-full lg:w-1/3 p-4 border-t lg:border-t-0 lg:border-l border-kick-border flex flex-col max-h-[400px] lg:max-h-[600px] overflow-y-auto">
+      <div class="w-full lg:w-1/3 p-4 border-t lg:border-t-0 lg:border-l border-kick-border flex flex-col">
         <StreamChat />
       </div>
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -36,7 +36,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-/* No additional styles needed as Tailwind handles the responsive design */
-</style>
