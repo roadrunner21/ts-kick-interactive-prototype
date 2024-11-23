@@ -7,12 +7,15 @@
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-60"></div>
     <!-- Content -->
-    <div class="relative z-10 max-w-3xl mx-auto text-center kick-frame text-white px-4 animate-fadeIn">
-      <blockquote class="text-2xl md:text-3xl font-semibold italic">
-        "We're thinking only of the next 5-10 years when we're trying to plan things out here right."
-      </blockquote>
+    <div class="relative z-10 max-w-3xl mx-auto text-center text-white animate-fadeIn">
+      <div class="kick-frame px-4">
+        <blockquote class="text-2xl md:text-3xl font-semibold italic">
+          "We're thinking only of the next 5-10 years when we're trying to plan things out here right."
+        </blockquote>
+        <p class="italic pt-2">— Eddie during his chat with WestCOL</p>
+      </div>
       <p class="mt-4 text-lg">
-        The conversation with WestCOL inspired me to align myself with Kick's long-term vision, dedicating time to craft my own ideas and contributions to its success.
+        Listening to your conversation with WestCOL really struck a chord with me. It got me thinking about how I could contribute to Kick's exciting future. I've spent some time brewing up ideas that I believe can help us shape the next decade of streaming together.
       </p>
     </div>
   </section>

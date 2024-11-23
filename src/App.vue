@@ -13,6 +13,7 @@
     <InspirationSection />
     <ChallengesAndSolutions />
     <PrototypeDemonstration />
+    <OpenSourceSection />
     <CallToAction />
   </div>
 </template>
@@ -29,10 +30,12 @@ import PrototypeDemonstration from '@/components/PrototypeDemonstration.vue';
 import CallToAction from '@/components/CallToAction.vue';
 import HighlightsSection from '@/components/HighlightsSection.vue';
 import ChallengesAndSolutions from '@/components/ChallengesAndSolutions.vue';
+import OpenSourceSection from "@/components/OpenSourceSection.vue";
 
 export default defineComponent({
   name: 'App',
   components: {
+    OpenSourceSection,
     HighlightsSection,
     HeroSection,
     AboutMe,

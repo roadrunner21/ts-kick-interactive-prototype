@@ -17,18 +17,16 @@
           <h2 class="text-4xl font-bold text-kick-text mb-4">About Me</h2>
           <h3 class="text-2xl mb-6">Innovative Frontend Developer Driving Community Engagement</h3>
           <p class="text-lg leading-relaxed mb-4">
-            I’m <span class="font-semibold">Marco</span>, a software developer with over a decade of experience specializing in
-            <span class="text-kick-highlight font-semibold">JavaScript</span> across the stack.
-          </p>
-          <p class="text-lg leading-relaxed mb-4">
-            From developing production planning software in C#,
-            to delivering robust full-stack solutions with React and Vue,
-            my career has been driven by a passion for building scalable, user-focused applications.
+            Hey there! I'm <span class="font-semibold">Marco</span>, and I've been crafting software solutions for
+            over a decade, specializing in <span class="text-kick-highlight font-semibold">JavaScript magic both front and back</span>.
+            My journey started with building
+            production planning software in C#, but I quickly found my calling in creating engaging, user-focused web
+            applications.
           </p>
           <p class="text-lg leading-relaxed mb-6">
-            In recent years, I’ve specialized in frontend development, collaborating with <span class="font-semibold">agencies</span>
-            and <span class="font-semibold">end-customers</span> to create high-performance <span class="text-kick-highlight font-semibold">web applications</span>
-            and <span class="text-kick-highlight font-semibold">PWAs</span> that deliver seamless user experiences.
+            Lately, I've been diving deep into frontend development with React and Vue, partnering with <b>awesome agencies</b>
+            and <b>individual clients</b> to build high-performance <span class="text-kick-highlight font-semibold">web apps and PWAs</span>. I'm all about delivering seamless experiences that
+            users love.
           </p>
         </div>
       </div>

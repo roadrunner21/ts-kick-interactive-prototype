@@ -147,7 +147,7 @@
 }
 
 .btn-secondary {
-    @apply bg-white text-kick-highlight py-3 px-6 rounded hover:bg-gray-100 font-semibold transition-colors duration-300;
+    @apply bg-white text-black py-3 px-6 rounded hover:bg-gray-100 font-semibold transition-colors duration-300 ;
 }
 
 .section-heading {

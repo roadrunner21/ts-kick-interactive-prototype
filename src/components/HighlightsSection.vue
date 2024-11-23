@@ -5,29 +5,29 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
         <HighlightItem
             icon="experience"
-            title="10+ Years of Experience"
+            title="10+ Years in the Game"
             description="From process optimization to full-stack web development."
             titleClass="text-kick-accent"
             descriptionClass="text-kick-label"
         />
         <HighlightItem
             icon="frontend"
-            title="Frontend Specialization"
-            description="Expertise in JavaScript, React, and Vue."
+            title="Frontend Fanatic"
+            description="JavaScript, React, Vue—you name it, I've probably built something cool with it."
             titleClass="text-kick-accent"
             descriptionClass="text-kick-label"
         />
         <HighlightItem
             icon="backend"
-            title="Versatility"
-            description="Proficient in backend technologies like Node.js and Laravel."
+            title="Jack of All Trades"
+            description="Comfortable on the backend too, with Node.js and Laravel up my sleeve."
             titleClass="text-kick-accent"
             descriptionClass="text-kick-label"
         />
         <HighlightItem
             icon="contractor"
-            title="Independent Contractor Strengths"
-            description="Quick onboarding, adaptability, and results-driven development."
+            title="Independent Contractor Superpowers"
+            description="Quick to jump in, adaptable, and always focused on delivering results that matter."
             titleClass="text-kick-accent"
             descriptionClass="text-kick-label"
         />

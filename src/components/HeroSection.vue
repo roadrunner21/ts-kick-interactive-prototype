@@ -10,11 +10,11 @@
 
       <!-- Description -->
       <p class="text-lg md:text-xl text-white mb-4 max-w-3xl mx-auto">
-        Leveraging innovation to enhance Kick's community features, boost viewer engagement, and empower creators with cutting-edge tools.
+        I'm excited to share some ideas on how we can enhance Kick's community features, boost viewer engagement, and empower creators with innovative tools.
       </p>
       <!-- Call-to-Action Button -->
       <button @click="$emit('scroll-down')" class="btn-primary mt-6">
-        Explore My Vision
+        Dive into My Vision
       </button>
     </div>
 
