@@ -53,7 +53,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      if (aboutMeRef.value) {
+      if (window.scrollY === 0 && aboutMeRef.value) {
         observeAndScroll(aboutMeRef.value.$el, 0);
       }
     });
