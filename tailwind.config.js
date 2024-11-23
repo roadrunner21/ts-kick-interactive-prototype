@@ -43,6 +43,7 @@ module.exports = {
         'fadeIn': 'fadeIn 1s ease-out',
         'pulseSlow': 'pulse 2s infinite',
         'bounceSlow': 'bounce 2s infinite',
+        'glow': 'glowAnimation 1s ease-in-out infinite',
       },
       keyframes: {
         gradientShift: {
@@ -50,8 +51,9 @@ module.exports = {
           '100%': { 'background-position': '200% 50%' },
         },
         glowAnimation: {
-          '0%': { opacity: '1' },
-          '100%': { opacity: '0' },
+          '0%': { opacity: '0.7', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
+          '100%': { opacity: '0.7', transform: 'scale(1)' },
         },
         vhsColorShift: {
           '0%': { filter: 'hue-rotate(0deg)' },
@@ -66,6 +68,7 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+
         // Additional keyframes if needed
       },
     },

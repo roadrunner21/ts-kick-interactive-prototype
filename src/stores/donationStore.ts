@@ -1,13 +1,12 @@
+// donationStore.ts
 import { defineStore } from 'pinia';
 import { useChatStore } from './chatStore';
 
-// Constants for magic numbers
 const HYPE_TRAIN_GOAL_INITIAL = 100;
 const HYPE_TRAIN_TIME_INITIAL = 20; // 20 seconds countdown
 const HYPE_TRAIN_LEVEL_UP_FACTOR = 1.5;
-const HYPE_TRAIN_COOLDOWN_TIME = 60000; // 1 minute cooldown
-const INTERVAL_DELAY = 1000; // 1000 ms (1 second)
-const PERCENTAGE_MULTIPLIER = 100; // For percentage calculations
+const INTERVAL_DELAY = 1000; // 1 second
+const PERCENTAGE_MULTIPLIER = 100; // Percentage calculations
 
 export const useDonationStore = defineStore('donation', {
   state: () => ({
@@ -18,8 +17,6 @@ export const useDonationStore = defineStore('donation', {
     hypeTrainGoal: HYPE_TRAIN_GOAL_INITIAL,
     hypeTrainTimeRemaining: HYPE_TRAIN_TIME_INITIAL,
     hypeTrainIntervalId: null as null | number,
-    hypeTrainCooldownId: null as null | number,
-    hypeTrainEndedRecently: false,
   }),
 
   actions: {
@@ -31,7 +28,7 @@ export const useDonationStore = defineStore('donation', {
         text: `donated $${amount}!`,
       });
 
-      if (!this.hypeTrainActive && !this.hypeTrainEndedRecently) {
+      if (!this.hypeTrainActive) {
         this.startHypeTrain();
       }
       if (this.hypeTrainActive) {
@@ -71,7 +68,7 @@ export const useDonationStore = defineStore('donation', {
     levelUpHypeTrain() {
       this.hypeTrainLevel++;
       this.hypeTrainProgress -= this.hypeTrainGoal;
-      this.hypeTrainGoal = Math.round(this.hypeTrainGoal * HYPE_TRAIN_LEVEL_UP_FACTOR); // Multiply by 1.5
+      this.hypeTrainGoal = Math.round(this.hypeTrainGoal * HYPE_TRAIN_LEVEL_UP_FACTOR);
       this.hypeTrainTimeRemaining = HYPE_TRAIN_TIME_INITIAL; // Reset to 20 seconds
 
       const chatStore = useChatStore();
@@ -93,16 +90,9 @@ export const useDonationStore = defineStore('donation', {
         username: 'System',
         text: '🚂 Hype Train has ended.',
       });
-
-      this.hypeTrainEndedRecently = true;
-      this.hypeTrainCooldownId = window.setTimeout(() => {
-        this.hypeTrainEndedRecently = false;
-        this.hypeTrainCooldownId = null;
-      }, HYPE_TRAIN_COOLDOWN_TIME); // 1 minute cooldown
     },
 
     resetHypeTrain() {
-      // Optional: If you need to reset Hype Train manually
       this.hypeTrainActive = false;
       this.hypeTrainLevel = 0;
       this.hypeTrainProgress = 0;
@@ -112,17 +102,12 @@ export const useDonationStore = defineStore('donation', {
         clearInterval(this.hypeTrainIntervalId);
         this.hypeTrainIntervalId = null;
       }
-      if (this.hypeTrainCooldownId !== null) {
-        clearTimeout(this.hypeTrainCooldownId);
-        this.hypeTrainCooldownId = null;
-      }
-      this.hypeTrainEndedRecently = false;
     },
   },
 
   getters: {
     hypeTrainProgressPercentage(state) {
-      return (state.hypeTrainProgress / state.hypeTrainGoal) * PERCENTAGE_MULTIPLIER; // Use the constant for percentage
+      return (state.hypeTrainProgress / state.hypeTrainGoal) * PERCENTAGE_MULTIPLIER;
     },
   },
 });
