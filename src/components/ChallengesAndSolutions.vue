@@ -23,15 +23,15 @@
             <div
                 class="bg-gradient-to-b from-dark-red via-dark-red-hover to-dark-red rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
             >
-              <div class="flex items-center mb-3">
+              <div class="flex mb-3">
                 <span
-                    class="px-2 py-1 bg-red-600 text-white text-xs md:text-sm font-semibold rounded mr-2"
+                    class="px-2 py-1 bg-red-600 text-white text-xs md:text-sm font-semibold rounded mr-2 self-start mt-0.5"
                 >
                   Challenge
                 </span>
                 <component
                     :is="pair.challenge.icon"
-                    class="h-6 w-6 text-red-500 mr-2"
+                    class="min-h-6 min-w-6 max-h-6 max-w-6 text-red-500 mr-2 mt-0.5"
                 ></component>
                 <h3 class="text-xl md:text-2xl font-semibold">
                   {{ pair.challenge.title }}
@@ -51,15 +51,15 @@
             <div
                 class="bg-gradient-to-b from-dark-kick-green via-dark-kick-green-hover to-dark-kick-green rounded-lg shadow-lg p-6 h-full flex flex-col transition-transform hover:shadow-2xl hover:-translate-y-1"
             >
-              <div class="flex items-center mb-3">
+              <div class="flex mb-3">
                 <span
-                    class="px-2 py-1 bg-kick-highlight text-black text-xs md:text-sm font-semibold rounded mr-2"
+                    class="px-2 py-1 bg-kick-highlight text-black text-xs md:text-sm font-semibold rounded mr-2 self-start mt-0.5"
                 >
                   Solution
                 </span>
                 <component
                     :is="pair.solution.icon"
-                    class="h-6 w-6 text-kick-highlight mr-2"
+                    class="min-h-6 min-w-6 max-h-6 max-w-6 text-kick-highlight mr-2 mt-0.5"
                 ></component>
                 <h3 class="text-xl md:text-2xl font-semibold">
                   {{ pair.solution.title }}
