@@ -28,7 +28,7 @@ export const useDonationStore = defineStore('donation', {
         text: `donated $${amount}!`,
       });
 
-      if (!this.hypeTrainActive && !this.hypeTrainEndedRecently) {
+      if (!this.hypeTrainActive) {
         this.startHypeTrain();
       }
       if (this.hypeTrainActive) {
