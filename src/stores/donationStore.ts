@@ -1,4 +1,3 @@
-// donationStore.ts
 import { defineStore } from 'pinia';
 import { useChatStore } from './chatStore';
 
@@ -17,6 +16,7 @@ export const useDonationStore = defineStore('donation', {
     hypeTrainGoal: HYPE_TRAIN_GOAL_INITIAL,
     hypeTrainTimeRemaining: HYPE_TRAIN_TIME_INITIAL,
     hypeTrainIntervalId: null as null | number,
+    hypeTrainEndedRecently: false, // New state added
   }),
 
   actions: {
@@ -28,7 +28,7 @@ export const useDonationStore = defineStore('donation', {
         text: `donated $${amount}!`,
       });
 
-      if (!this.hypeTrainActive) {
+      if (!this.hypeTrainActive && !this.hypeTrainEndedRecently) {
         this.startHypeTrain();
       }
       if (this.hypeTrainActive) {
@@ -38,6 +38,7 @@ export const useDonationStore = defineStore('donation', {
 
     startHypeTrain() {
       this.hypeTrainActive = true;
+      this.hypeTrainEndedRecently = false; // Reset when Hype Train starts
       this.hypeTrainLevel = 1;
       this.hypeTrainProgress = 0;
       this.hypeTrainGoal = HYPE_TRAIN_GOAL_INITIAL;
@@ -85,6 +86,8 @@ export const useDonationStore = defineStore('donation', {
         this.hypeTrainIntervalId = null;
       }
 
+      this.hypeTrainEndedRecently = true; // Set to true when Hype Train ends
+
       const chatStore = useChatStore();
       chatStore.addMessage({
         username: 'System',
@@ -102,6 +105,7 @@ export const useDonationStore = defineStore('donation', {
         clearInterval(this.hypeTrainIntervalId);
         this.hypeTrainIntervalId = null;
       }
+      this.hypeTrainEndedRecently = false; // Reset to false
     },
   },
 

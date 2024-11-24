@@ -15,10 +15,6 @@ This project is an interactive prototype created to demonstrate community-driven
 - Automatically generates chat messages with various sentiments, including the use of emotes commonly found on streaming platforms.
 - Chat speed and sentiment can be adjusted to simulate different levels of community excitement.
 
-### Channel Points (Future Feature):
-- Redeemable points for triggering smiley emotions.
-- Points accumulate through interactions and can be redeemed for visual feedback.
-
 ## Tech Stack
 - **Vue 3**: Core framework.
 - **TypeScript**: Type safety and tooling.
