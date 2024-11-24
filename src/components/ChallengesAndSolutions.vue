@@ -150,7 +150,7 @@ export default defineComponent({
           benefits:
               'Sparks innovation, gives streamers more tools to engage their audience, and builds a thriving ecosystem around Kick.',
           icon: 'AcademicCapIcon',
-          image: 'https://i.ibb.co/c2S47DX/Screenshot-2024-11-23-at-04-09-01.jpg',
+          image: 'https://i.imgur.com/b0Tid17.jpeg',
         },
       },
       {
