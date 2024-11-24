@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
 import { defineStore } from 'pinia';
 
 export interface ChatMessage {
+  id: string;
   username: string;
   text: string;
 }
@@ -14,17 +16,18 @@ export const useChatStore = defineStore('chat', {
   state: () => ({
     messages: [] as ChatMessage[],
   }),
-
   actions: {
-    addMessage(message: ChatMessage) {
-      this.messages.push(message);
-      // Limit the message history length to avoid memory issues
+    addMessage(message: Omit<ChatMessage, 'id'>) {
+      const newMessage: ChatMessage = {
+        id: uuidv4(), // Generate a unique ID
+        ...message,
+      };
+      this.messages.push(newMessage);
       if (this.messages.length > MAX_MESSAGES) {
         this.messages.shift();
       }
     },
     addSystemMessage(text: string) {
-      // Adds a system-generated message with 'System' as the username
       this.addMessage({
         username: 'System',
         text,
@@ -36,7 +39,6 @@ export const useChatStore = defineStore('chat', {
   },
 
   getters: {
-    // Returns the last RECENT_MESSAGES_COUNT messages
     recentMessages: (state) => state.messages.slice(-RECENT_MESSAGES_COUNT),
   },
 });

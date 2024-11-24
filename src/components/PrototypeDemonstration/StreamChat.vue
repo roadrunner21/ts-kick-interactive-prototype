@@ -8,7 +8,7 @@
     <!-- Main Content Area -->
     <div class="relative flex flex-1 overflow-hidden">
       <!-- Hype Train (if active) -->
-      <HypeTrain class="absolute top-0 left-0 right-0 z-10" />
+      <HypeTrain class="absolute top-0 left-0 right-0 z-10"/>
 
       <!-- Chat Messages Container -->
       <div
@@ -20,8 +20,8 @@
         <!-- Chat Messages -->
         <div class="text-white text-sm space-y-1">
           <ChatMessage
-              v-for="(message, index) in displayedChatMessages"
-              :key="index"
+              v-for="(message) in displayedChatMessages"
+              :key="message.id"
               :username="message.username"
               :text="message.text"
               @contentChanged="handleContentChange"
@@ -96,12 +96,19 @@ export default defineComponent({
       handleContentChange,
     } = useChatScroll(chatContainer);
 
-    watch(displayedChatMessages, async () => {
-      if (isAutoScroll.value) {
-        await nextTick();
-        scrollToBottom();
-      }
-    });
+    watch(
+        () => displayedChatMessages.value.length,
+        async () => {
+          if (isAutoScroll.value) {
+            await nextTick();
+            scrollToBottom();
+          }
+        },
+        {
+          immediate: false, flush: 'post',
+        },
+    );
+
 
     onMounted(() => {
       chatLogic.startChatSimulation();
