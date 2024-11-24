@@ -10,7 +10,7 @@ export function showConsoleEasterEgg(): void {
     "color: #53FC18; font-size: 16px; font-weight: bold;",
   );
   console.log(
-    "%cLooks like you've cracked open the console... guess I caught your attention. 😉 \n\nSo here’s a thought:\nWhy make it this hard to find great talent? Let’s make it easier. Hire someone who can do it for you! 🚀\n\n",
+    "%cLooks like you've cracked open the console... guess I caught your attention. 😉 \n\nSo here’s a thought:\nWhy make it this hard to find great talent? Let’s make it easier. Hire someone who can do it for you! 🚀\n\n 👉 marco@heftiweb.ch ",
     "color: #929EA6; font-size: 12px;",
   );
   console.log(
