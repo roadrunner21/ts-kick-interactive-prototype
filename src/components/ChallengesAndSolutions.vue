@@ -168,7 +168,7 @@ export default defineComponent({
           benefits:
               'Gets viewers more involved, boosts donation activity, and makes streams way more fun.',
           icon: 'ChatBubbleLeftEllipsisIcon',
-          image: 'https://i.ibb.co/yVP02Wp/Screenshot-2024-11-23-at-04-59-31.png',
+          image: 'https://i.imgur.com/G74sirg.png',
         },
       },
       {

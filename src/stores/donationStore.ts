@@ -24,7 +24,7 @@ export const useDonationStore = defineStore('donation', {
       this.totalDonation += amount;
       const chatStore = useChatStore();
       chatStore.addMessage({
-        username: 'User123',
+        username: 'Eddie',
         text: `donated $${amount}!`,
       });
 
