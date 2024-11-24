@@ -20,7 +20,7 @@
         <HighlightItem
             icon="backend"
             title="Jack of All Trades"
-            description="Comfortable on the backend too, with Node.js and Laravel up my sleeve."
+            description="Comfortable on the backend too, with Node.js and Symfony up my sleeve."
             titleClass="text-kick-accent"
             descriptionClass="text-kick-label"
         />
