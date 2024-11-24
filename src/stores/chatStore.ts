@@ -19,7 +19,7 @@ export const useChatStore = defineStore('chat', {
   actions: {
     addMessage(message: Omit<ChatMessage, 'id'>) {
       const newMessage: ChatMessage = {
-        id: uuidv4(), // Generate a unique ID
+        id: uuidv4(),
         ...message,
       };
       this.messages.push(newMessage);
