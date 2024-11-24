@@ -11,7 +11,7 @@
         v-if="isVisible"
         class="absolute top-0 left-0 right-0 bg-kick-bg bg-opacity-95 p-2 border-b border-kick-border z-20 text-xs"
     >
-      <div class="relative">
+      <div class="relative overflow-hidden">
         <!-- Header Section -->
         <div class="flex items-center justify-between mb-1">
           <p class="text-kick-text font-bold">
@@ -56,7 +56,7 @@
 
         <!-- Top Donators Section -->
         <div class="mt-2 flex flex-wrap text-kick-text">
-          <div class="font-semibold w-full mr-2">Top Donators:</div>
+          <div class="font-semibold w-full mr-2">Top Contributors:</div>
           <div class="flex flex-wrap flex-1 justify-between ">
             <div
                 v-for="donator in topDonators"
@@ -68,8 +68,18 @@
             </div>
           </div>
         </div>
+        <!-- Emoji Animation -->
+        <div v-if="showAnimation" class="absolute inset-0 flex items-center justify-center">
+          <div class="text-3xl animate-bounce">
+            {{ currentEmoji }}
+          </div>
+        </div>
+
+        <!-- Confetti Canvas -->
+        <canvas ref="confettiCanvas" class="absolute inset-0 pointer-events-none"></canvas>
       </div>
     </div>
+
   </transition>
 </template>
 
@@ -95,8 +105,8 @@ export default defineComponent({
   name: 'HypeTrain',
   setup() {
     const donationStore = useDonationStore();
-    const {confettiCanvas, launchConfetti} = useConfetti();
-    const {levelUpAnimation, triggerLevelUpAnimation} = useLevelUpAnimation();
+    const { confettiCanvas, launchConfetti } = useConfetti();
+    const { levelUpAnimation, triggerLevelUpAnimation } = useLevelUpAnimation();
 
     // Constants
     const SECOND = 1000;
@@ -186,11 +196,16 @@ export default defineComponent({
     };
 
     const triggerMilestone = (milestone: Milestone): void => {
+      const EMOJI_VISIBLE_SECONDS = 3000;
+
       if (!milestone.reached) {
         milestone.reached = true;
         currentEmoji.value = milestone.emoji;
         launchConfetti();
         showAnimation.value = true;
+        setTimeout(() => {
+          showAnimation.value = false;
+        }, EMOJI_VISIBLE_SECONDS); // Hide emoji after 3 seconds
       }
     };
 
