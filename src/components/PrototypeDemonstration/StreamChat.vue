@@ -13,7 +13,7 @@
       <!-- Chat Messages Container -->
       <div
           ref="chatContainer"
-          class="flex-1 overflow-y-auto p-2 pt-12 sm:p-4 sm:pt-16 min-h-[600px] max-h-[600px]"
+          class="flex-1 overflow-y-auto p-2 sm:p-4 min-h-[600px] max-h-[600px]"
           @scroll="onScroll"
           tabindex="0"
       >
